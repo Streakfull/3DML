@@ -141,9 +141,24 @@ class PointNetSegmentation(nn.Module):
         self.num_classes = num_classes
         self.encoder = PointNetEncoder(return_point_features=True)
         # TODO: Define convolutions, batch norms, and ReLU
+        conv1 = nn.Conv1d(in_channels=1088,out_channels=512,kernel_size=1)
+        bn1 = nn.BatchNorm1d(512)
+        conv2 = nn.Conv1d(in_channels=512,out_channels=256,kernel_size=1)
+        bn2 = nn.BatchNorm1d(256)
+        conv3 = nn.Conv1d(in_channels=256, out_channels=128, kernel_size=1)
+        bn3 = nn.BatchNorm1d(128)
+        conv4 = nn.Conv1d(in_channels=128, out_channels=num_classes, kernel_size=1)
+        self.conv = nn.Sequential(
+                conv1,bn1,nn.ReLU(),conv2,bn2,nn.ReLU(), conv3,bn3,nn.ReLU(),conv4
+        )
+
+
+
+   
 
     def forward(self, x):
         x = self.encoder(x)
         # TODO: Pass x through all layers, no batch norm or ReLU after the last conv layer
+        x = self.conv(x)
         x = x.transpose(2, 1).contiguous()
         return x
