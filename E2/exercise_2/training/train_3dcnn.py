@@ -133,8 +133,11 @@ def train(model, trainloader, valloader, device, config):
                           except:
                             import pdb;pdb.set_trace()
                     total += prediction.shape[0]
-                    prediction = torch.mode(predicted_label.squeeze(0), 0).values.item()
-                    correct += (prediction == batch_val["label"].unsqueeze(1)).sum().item()
+                    
+                 
+                    prediction = torch.mode(predicted_label.squeeze(0), axis=-1).values
+                    
+                    correct += (prediction == batch_val["label"]).sum().item()
                 accuracy = 100 * correct / total
 
                 print(f'[{epoch:03d}/{i:05d}] val_loss: {loss_total_val / len(valloader):.3f}, val_accuracy: {accuracy:.3f}%')
