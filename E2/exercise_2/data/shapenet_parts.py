@@ -56,9 +56,9 @@ class ShapeNetParts(torch.utils.data.Dataset):
         item_extension  = f"points/{shape_id}.pts"
         labels_extension = f"points_label/{shape_id}.seg"
         item_path = ShapeNetParts.dataset_path/item_extension
-        import pdb;pdb.set_trace()
-        item = np.loadtxt(item_extension)
-        labels =  np.loadtxt(labels_extension)
+        labels_path = ShapeNetParts.dataset_path/labels_extension
+        item = np.loadtxt(item_path)
+        labels =  np.loadtxt(labels_path)
         sub_sample_indices = np.random.choice(item.shape[0],1024)
         item = np.transpose(item[sub_sample_indices])
         labels =labels[sub_sample_indices] 
