@@ -56,7 +56,7 @@ def train(model, trainloader, valloader, device, config):
                         prediction = torch.argmax(prediction_val,dim=-1)
                         loss_total_val = loss_criterion(prediction_val,batch_val["label"])
                 total+=prediction_val.shape[0]
-                import pdb;pdb.set_trace()
+          
                 correct+=(prediction==batch_val["label"]).sum().item()
                 accuracy = 100*correct/total
                 print(f'[{epoch:03d}/{i:05d}] val_loss: {loss_total_val / len(valloader):.3f}, val_accuracy: {accuracy:.3f}%')
