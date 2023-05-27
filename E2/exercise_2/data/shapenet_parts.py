@@ -52,11 +52,11 @@ class ShapeNetParts(torch.utils.data.Dataset):
         """
         category_id, shape_id = shapenet_id.split('/')
  
-        shape_id = "1eccbbbf1503c888f691355a196da5f"
+        #shape_id = "1eccbbbf1503c888f691355a196da5f"
         item_extension  = f"points/{shape_id}.pts"
         labels_extension = f"points_label/{shape_id}.seg"
-        item_path = ShapeNetParts.dataset_path/item_extension
-        labels_path = ShapeNetParts.dataset_path/labels_extension
+        item_path = ShapeNetParts.dataset_path/category_id/item_extension
+        labels_path = ShapeNetParts.dataset_path/category_id/labels_extension
         item = np.loadtxt(item_path)
         labels =  np.loadtxt(labels_path)
         sub_sample_indices = np.random.choice(item.shape[0],1024)
