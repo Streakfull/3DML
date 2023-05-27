@@ -51,14 +51,23 @@ class ShapeNetParts(torch.utils.data.Dataset):
         in shape 3x1024, and the segmentation labels, as numpy array in shape 1024
         """
         category_id, shape_id = shapenet_id.split('/')
+ 
+        shape_id = "1eccbbbf1503c888f691355a196da5f"
         item_extension  = f"points/{shape_id}.pts"
-        segmentation_extension = f"points_label/{shape_id}.seg"
-        item = np.load(item_extension)
-              
+        labels_extension = f"points_label/{shape_id}.seg"
+        item_path = ShapeNetParts.dataset_path/item_extension
+        import pdb;pdb.set_trace()
+        item = np.loadtxt(item_extension)
+        labels =  np.loadtxt(labels_extension)
+        sub_sample_indices = np.random.choice(item.shape[0],1024)
+        item = np.transpose(item[sub_sample_indices])
+        labels =labels[sub_sample_indices] 
+    
         # TODO: Load point cloud and segmentation labels, subsample to 1024 points. 
         # Make sure points and labels still correspond afterwards!
         # TODO: Important: Use ShapeNetParts.part_id_to_overall_id to 
         # convert the part labels you get from the .seg files from local to global 
         # ID as they start at 0 for each shape class whereas we want to predict the overall part class.
         # ShapeNetParts.part_id_to_overall_id converts an ID in form <shapenetclass_partlabel> to and integer representing the global part class id
+        return (item,labels)
         pass
