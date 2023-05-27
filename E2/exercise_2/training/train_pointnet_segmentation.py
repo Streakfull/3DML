@@ -53,8 +53,9 @@ def train(model, trainloader, valloader, device, config):
                 for batch_val in valloader:
                     ShapeNetParts.move_batch_to_device(batch_val, device)
                     # TODO Add missing pieces, as in the exercise parts before
-                    predicted_label = model(batch_val["points"])
-                    predicted_label = torch.argmax(predicted_label,dim=-1)
+                    prediction = model(batch_val["points"])
+                    
+                    predicted_label = torch.argmax(prediction,dim=-1)
                     total += predicted_label.numel()
                     correct += (predicted_label == batch_val['segmentation_labels']).sum().item()
 
