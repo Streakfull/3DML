@@ -4,15 +4,17 @@ import torch
 
 from exercise_2.data.shapenet_parts import ShapeNetParts
 from exercise_2.model.pointnet import PointNetSegmentation
+from tqdm import tqdm
 
 
 def train(model, trainloader, valloader, device, config):
 
     # TODO Declare loss and move to specified device
-    loss_criterion = None
+    loss_criterion = torch.nn.CrossEntropyLoss()
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=config['learning_rate'])
 
     # TODO Declare optimizer
-    optimizer = None
+    #optimizer = None
 
     # set model to train, important if your network has e.g. dropout or batchnorm layers
     model.train()
@@ -23,10 +25,18 @@ def train(model, trainloader, valloader, device, config):
     # keep track of running average of train loss for printing
     train_loss_running = 0.
 
-    for epoch in range(config['max_epochs']):
+    for epoch in tqdm(range(config['max_epochs'])):
         for i, batch in enumerate(trainloader):
             # TODO Add missing pieces, as in the exercise parts before
-
+            ShapeNetParts.move_batch_to_device(batch, device)
+            optimizer.zero_grad()
+            prediction = model(batch["points"])
+            loss = loss_criterion(prediction.transpose(2, 1),batch["segmentation_labels"])
+            loss.backward()
+            optimizer.step()
+            train_loss_running += loss.item()
+            iteration = epoch * len(trainloader) + i
+            
             if iteration % config['print_every_n'] == (config['print_every_n'] - 1):
                 print(f'[{epoch:03d}/{i:05d}] train_loss: {train_loss_running / config["print_every_n"]:.3f}')
                 train_loss_running = 0.
@@ -41,8 +51,11 @@ def train(model, trainloader, valloader, device, config):
                 # forward pass and evaluation for entire validation set
                 loss_val = 0.
                 for batch_val in valloader:
+                    ShapeNetParts.move_batch_to_device(batch_val, device)
                     # TODO Add missing pieces, as in the exercise parts before
-
+                    prediction = model(batch_val["points"])
+                    
+                    predicted_label = torch.argmax(prediction,dim=-1)
                     total += predicted_label.numel()
                     correct += (predicted_label == batch_val['segmentation_labels']).sum().item()
 

@@ -24,10 +24,11 @@ class InferenceHandler3DCNN:
         :return: class category name for the voxels, as predicted by the model
         """
         input_tensor = torch.from_numpy(voxels).float().unsqueeze(0).unsqueeze(0)
-
+        
         # TODO: Predict class
-        prediction = None
-        class_id = None
-        class_name = None
-
+     
+        prediction = self.model(input_tensor).argmax(dim=2).squeeze(0)
+        prediction = torch.mode(prediction,0).values.item()
+        class_id = ShapeNetVox.classes[prediction]
+        class_name = ShapeNetVox.class_name_mapping[class_id]
         return class_name
