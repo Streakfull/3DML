@@ -21,14 +21,20 @@ class ShapeNet(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
         sdf_id, df_id = self.items[index].split(' ')
-
+  
         input_sdf = ShapeNet.get_shape_sdf(sdf_id)
         target_df = ShapeNet.get_shape_df(df_id)
 
         # TODO Apply truncation to sdf and df
         # TODO Stack (distances, sdf sign) for the input sdf
         # TODO Log-scale target df
-
+        input_sdf = np.clip(input_sdf,-3,3)
+        target_df = np.clip(target_df,-3,3)
+        input_sdf_signed = np.abs(input_sdf)
+        signed_input_sdf = np.ones((32,32,32))
+        negative_indices = input_sdf < 0
+        signed_input_sdf[negative_indices] = -1
+        input_sdf = np.vstack((input_sdf_signed[np.newaxis,:,:,:],signed_input_sdf[np.newaxis,:,:,:]))
         return {
             'name': f'{sdf_id}-{df_id}',
             'input_sdf': input_sdf,
@@ -41,16 +47,27 @@ class ShapeNet(torch.utils.data.Dataset):
     @staticmethod
     def move_batch_to_device(batch, device):
         # TODO add code to move batch to device
+        batch.to(device)
         pass
 
     @staticmethod
     def get_shape_sdf(shapenet_id):
-        sdf = None
+        item_class = shapenet_id.split("/")[0]
+        item_id = shapenet_id.split("/")[1]
+        dt = np.dtype([('dimX',np.uint64), ('dimY',np.uint64),('dimZ',np.uint64)])
+        dimensions = np.fromfile(f"{ShapeNet.dataset_sdf_path}/{item_class}/{item_id}.sdf", dtype=np.uint64, count =3)
+        sdf = np.fromfile(f"{ShapeNet.dataset_sdf_path}/{item_class}/{item_id}.sdf",dtype=np.float32, offset=24)
+        sdf = np.reshape(sdf,dimensions)
         # TODO implement sdf data loading
         return sdf
 
     @staticmethod
     def get_shape_df(shapenet_id):
-        df = None
+        item_class = shapenet_id.split("/")[0]
+        item_id = shapenet_id.split("/")[1]
+        dt = np.dtype([('dimX',np.uint64), ('dimY',np.uint64),('dimZ',np.uint64)])
+        dimensions = np.fromfile(f"{ShapeNet.dataset_df_path}/{item_class}/{item_id}.df", dtype=np.uint64, count =3)
+        df = np.fromfile(f"{ShapeNet.dataset_df_path}/{item_class}/{item_id}.df",dtype=np.float32,offset=24)
+        df = np.reshape(df,dimensions)
         # TODO implement df data loading
         return df
