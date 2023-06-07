@@ -35,6 +35,7 @@ class ShapeNet(torch.utils.data.Dataset):
         negative_indices = input_sdf < 0
         signed_input_sdf[negative_indices] = -1
         input_sdf = np.vstack((input_sdf_signed[np.newaxis,:,:,:],signed_input_sdf[np.newaxis,:,:,:]))
+        target_df = np.log(target_df + 1)
         return {
             'name': f'{sdf_id}-{df_id}',
             'input_sdf': input_sdf,
