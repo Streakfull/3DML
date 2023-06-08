@@ -41,7 +41,7 @@ def train(model, train_dataloader, val_dataloader, device, config):
             # TODO: Compute loss, Compute gradients, Update network parameters
 
             loss_total = loss_a(reconstruction,target) + loss_b(reconstruction,target)
-            print(loss_total,"LOSS TOTAL")
+            loss_total /= batch['input_sdf'].shape[0]
             loss_total.backward()
             optimizer.step()
             # Logging
