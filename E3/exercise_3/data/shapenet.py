@@ -29,7 +29,7 @@ class ShapeNet(torch.utils.data.Dataset):
         # TODO Stack (distances, sdf sign) for the input sdf
         # TODO Log-scale target df
         input_sdf = np.clip(input_sdf,-3,3)
-        target_df = np.clip(target_df,-3,3)
+        target_df = np.clip(target_df,0,3)
         input_sdf_signed = np.abs(input_sdf)
         signed_input_sdf = np.ones((32,32,32))
         negative_indices = input_sdf < 0

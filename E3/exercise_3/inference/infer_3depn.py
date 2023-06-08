@@ -25,7 +25,16 @@ class InferenceHandler3DEPN:
         # TODO Apply truncation distance: SDF values should lie within -3 and 3, DF values between 0 and 3
 
         with torch.no_grad():
-            reconstructed_df = None
+            input_sdf = np.clip(input_sdf,-3,3)
+            target_df = np.clip(target_df,0,3)
+            input_sdf_signed = np.abs(input_sdf)
+            signed_input_sdf = np.ones((32,32,32))
+            negative_indices = input_sdf < 0
+            signed_input_sdf[negative_indices] = -1
+            input_sdf_copy = np.vstack((input_sdf_signed[np.newaxis,:,:,:],signed_input_sdf[np.newaxis,:,:,:]))
+            input_sdf_copy = torch.tensor(input_sdf_copy).float().unsqueeze(0)
+            reconstructed_df = self.model(input_sdf_copy)
+            reconstructed_df = np.exp(reconstructed_df) - 1
             # TODO: Pass input in the right format though the network and revert the log scaling by applying exp and subtracting 1
 
         input_sdf = np.abs(input_sdf)
