@@ -82,16 +82,16 @@ class ShapeImplicit(torch.utils.data.Dataset):
         :return: a pytorch float32 torch tensor of shape (num_sample_points, 4) with each row being [x, y, z, sdf_value at xyz]
         """
         npz = np.load(path_to_sdf)
-        pos_tensor = remove_nans(torch.from_numpy(npz["pos"]))
-        neg_tensor = remove_nans(torch.from_numpy(npz["neg"]))
+        pos_tensor = remove_nans(torch.from_numpy(npz["pos"]).float())
+        neg_tensor = remove_nans(torch.from_numpy(npz["neg"]).float())
         pos_tensor_perm = torch.randperm(pos_tensor.size(0))
         neg_tensor_perm = torch.randperm(neg_tensor.size(0)) 
         k = self.num_sample_points//2
         pos = pos_tensor[pos_tensor_perm[:k]]
         neg = neg_tensor[neg_tensor_perm[:k]]
         total = torch.cat((pos,neg),dim=0)
-        total_perm = torch.randperm(total.size(0))
-        total = total[total_perm]
+        #total_perm = torch.randperm(total.size(0))
+        #total = total[total_perm]
         # TODO: Implement such that you return a pytorch float32 torch tensor of shape (self.num_sample_points, 4)
         # the returned tensor shoud have approximately self.num_sample_points/2 randomly selected samples from pos_tensor
         # and approximately self.num_sample_points/2 randomly selected samples from neg_tensor
