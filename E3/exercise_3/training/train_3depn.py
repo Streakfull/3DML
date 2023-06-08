@@ -2,7 +2,10 @@ from pathlib import Path
 
 import numpy as np
 import torch
-import tqdm
+<<<<<<< HEAD
+from tqdm import tqdm
+=======
+>>>>>>> 19941b7794c8cb7c5a36fa21bcecc09d6829d451
 
 from exercise_3.model.threedepn import ThreeDEPN
 from exercise_3.data.shapenet import ShapeNet
@@ -28,18 +31,18 @@ def train(model, train_dataloader, val_dataloader, device, config):
     # Keep track of running average of train loss for printing
     train_loss_running = 0.
 
-    for epoch in range(tqdm(config['max_epochs'])):
+    for epoch in range(config['max_epochs']):
         for batch_idx, batch in enumerate(train_dataloader):
             # TODO: Move batch to device, set optimizer gradients to zero, perform forward pass
             ShapeNet.move_batch_to_device(batch,device)
             optimizer.zero_grad()
-            print("HEREEE???2")
+            
             reconstruction = model(batch['input_sdf'].float())
             # Mask out known regions -- only use loss on reconstructed, previously unknown regions
             reconstruction[batch['input_sdf'][:, 1] == 1] = 0  # Mask out known
             target = batch['target_df']
             target[batch['input_sdf'][:, 1] == 1] = 0
-            print("HEREEE???")
+       
             # TODO: Compute loss, Compute gradients, Update network parameters
 
             loss_total = loss_a(reconstruction,target) + loss_b(reconstruction,target)
