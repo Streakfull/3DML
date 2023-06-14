@@ -1,0 +1,7 @@
+shapenet_dim32_df/
+shapenet_dim32_sdf
+
+runs/
+runs/3_1_3depn_overfitting
+runs/3_1_depn_generalization
+sdf_sofas/
