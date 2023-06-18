@@ -10,18 +10,18 @@ This repo contains all related work for the Machine Learning for 3D Geometry Cou
 
 ##### This mentions the steps neededed to run the project on the 3DML cluster provided by TUM
 
-- ssh <user>@ml3d.vc.in.tum.de - ssh into the login node
+- `ssh <user>@ml3d.vc.in.tum.de` - ssh into the login node
   - You will be prompted to enter your password
-- salloc --gpus=1
-- mkdir /cluster/54/<user>
-- cd /cluster/54/<user>
-- git clone https://<github_token_here>@github.com/Streakfull/3DML.git
-- cd 3DML/Project
-- poetry install
-- poetry shell
-- pip3 install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-- poetry run jupyter notebook --no-browser --ip=0.0.0.0 --port=8888
-- From your local machine: ssh -NL 3000:TUINI15-<connected_node>.vc.in.tum.de:8888 <user>@ml3d.vc.in.tum.de
+- `salloc --gpus=1`
+- `mkdir /cluster/54/<user>`
+- `cd /cluster/54/<user>`
+- `git clone https://<github_token_here>@github.com/Streakfull/3DML.git`
+- `cd 3DML/Project`
+- `poetry install`
+- `poetry shell`
+- `pip3 install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html`
+- `poetry run jupyter notebook --no-browser --ip=0.0.0.0 --port=8888`
+- From your local machine: `ssh -NL 3000:TUINI15-<connected_node>.vc.in.tum.de:8888 <user>@ml3d.vc.in.tum.de`
 - Run the `initial_setup.ipynb` notebook to obtain the dataset
 
 # General Links
