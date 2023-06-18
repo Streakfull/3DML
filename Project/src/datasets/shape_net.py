@@ -53,7 +53,7 @@ class ShapeNet(torch.utils.data.Dataset):
         if (self.is_all_categories()):
             for category in self.classes:
                 shape_ids = self.get_category_shape_ids(category)
-                self.items.extend(shape_ids)
+                items.extend(shape_ids)
             return items
         category_id = ShapeNet.category_directory_mapping[self.cat]
         return self.get_category_shape_ids(category_id)
