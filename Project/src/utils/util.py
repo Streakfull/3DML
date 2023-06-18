@@ -1,8 +1,11 @@
 
 import os
+import random
+import numpy as np
 import torch
 from einops import rearrange
 from PIL import Image
+
 
 def iou(x_gt, x, thres):
     thres_gt = 0.0
@@ -34,3 +37,13 @@ def save_image(image_numpy, image_path):
 def mkdir(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = True
