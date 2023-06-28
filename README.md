@@ -34,6 +34,6 @@ This repo contains all related work for the Machine Learning for 3D Geometry Cou
 
 # Team
 
-- Biray Sutcuoglu
+- Biray Sutcuoglu - biray.sutcuoglu@tum.de
 - Michael Kubitza - michael.kubitza@tum.de
 - Youssef Youssef - youssef@youssef.tum.de
