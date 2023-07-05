@@ -1,0 +1,4 @@
+logs_dir: logs
+is_train: true
+name: setup
+device: cuda:0
