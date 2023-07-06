@@ -4,7 +4,7 @@ import torch
 import utils.util as util
 
 # modified from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
-class BaseModel():
+class BaseModel(torch.nn.Module):
     def name(self):
         return 'BaseModel'
 
@@ -41,10 +41,22 @@ class BaseModel():
     def save(self, label):
         pass
 
-    def train(self,label):
+    def train(self):
         pass
 
-    def eval(self,label):
+    def eval(self):
+        pass
+
+    def to(self, device):
+        pass
+
+    def inference(self):
+        pass
+
+    def get_current_errors(self):
+        return 0
+    
+    def update_lr(self):
         pass
 
 

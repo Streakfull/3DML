@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from einops import rearrange
 from PIL import Image
+from cprint import *
 
 
 def iou(x_gt, x, thres):
@@ -36,10 +37,13 @@ def save_image(image_numpy, image_path):
 
 def mkdir(path):
     if not os.path.exists(path):
+        cprint.warn(f"- Creating new directory {path}")
         os.makedirs(path)
+        return
+    cprint.ok(f"- {path} directory found")
 
 
-def seed_everything(seed):
+def seed_all(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)

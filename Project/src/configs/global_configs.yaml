@@ -1,4 +1,8 @@
 logs_dir: logs
 is_train: true
-name: setup
+name: setup3
 device: cuda:0
+batch_size: 16
+n_epochs: 1
+print_every: 300
+validate_every: 300

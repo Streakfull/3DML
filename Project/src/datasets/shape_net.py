@@ -93,5 +93,5 @@ class ShapeNet(torch.utils.data.Dataset):
     @staticmethod
     def move_batch_to_device(batch, device):
         batch['images'] = batch['images'].to(device)
-        batch['voxel'] = batch['target_df'].to(device)
+        batch['voxels'] =  batch['voxels'].to(device)
         pass
