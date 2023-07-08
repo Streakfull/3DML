@@ -6,7 +6,7 @@ class ConvBlock(nn.Module):
         super(ConvBlock, self).__init__()
         padding = kernel_size // 2
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size, padding=padding)
-        self.relu = nn.ReLU()
+        self.relu = nn.LeakyReLU(0.01)
 
     def forward(self, x):
         x = self.conv(x)
@@ -30,7 +30,7 @@ class ResidualBlock(nn.Module):
     
         x = x + shortcut
         x = self.conv3(x)
-        x = nn.ReLU()(x)
+        x = nn.LeakyReLU(0.01)(x)
         return x
 
 # Define the model
@@ -74,7 +74,7 @@ class Encoder(nn.Module):
 
         self.flatten = nn.Flatten()
         self.fc = nn.Linear(4096, 1024)
-        self.relu = nn.ReLU()
+        self.relu = nn.LeakyReLU(0.01)
         
     def forward(self, x):
         x = self.conv1a(x)
@@ -114,12 +114,12 @@ class Encoder(nn.Module):
         x = self.flatten(x)
         x = self.fc(x)
         x = self.relu(x)
-        #output shape = torch.Size([1, 1024])
+        
         return x
 
-# n_convfilter = [96, 128, 256, 256, 256, 256]
-# n_fc_filters = [1024]
-# # Create an instance of the model
+n_convfilter = [96, 128, 256, 256, 256, 256]
+n_fc_filters = [1024]
+# Create an instance of the model
 # model = Encoder(3, n_convfilter=n_convfilter, n_fc_filters=n_fc_filters)
 # x = torch.randn(1, 3, 127, 127)
 # output = model(x)
