@@ -74,6 +74,7 @@ class Encoder(nn.Module):
 
         self.flatten = nn.Flatten()
         self.fc = nn.Linear(4096, 1024)
+        self.relu = nn.ReLU()
         
     def forward(self, x):
         x = self.conv1a(x)
@@ -112,7 +113,8 @@ class Encoder(nn.Module):
         
         x = self.flatten(x)
         x = self.fc(x)
-        
+        x = self.relu(x)
+        #output shape = torch.Size([1, 1024])
         return x
 
 # n_convfilter = [96, 128, 256, 256, 256, 256]
