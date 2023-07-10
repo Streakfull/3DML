@@ -42,7 +42,7 @@ class ShapeNet(torch.utils.data.Dataset):
     def __getitem__(self, index):
         shape_key = self.items[index]
         voxels = self.get_shape_voxels(shape_key)
-        images = self.get_shape_rendering_images(shape_key)[0]
+        images = self.get_shape_rendering_images(shape_key)
         return {
             "voxels": voxels[np.newaxis, :, :, :],
             "images": images[np.newaxis, :, :, :]
