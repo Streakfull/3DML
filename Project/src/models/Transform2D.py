@@ -16,12 +16,10 @@ class Transform2D(BaseModel):
         self.encoder = Encoder(in_channels=4)
         self.transformer = Transformer()
         self.decoder = Decoder()
-        self.criterion = torch.nn.CrossEntropyLoss()
+        self.criterion = torch.nn.BCELoss()
         self.optimizer = optim.Adam([p for p in self.parameters() if p.requires_grad == True], lr=configs["lr"])
 
     def set_input(self, input):
-        #return super().set_input(input)
-        #import pdb;pdb.set_trace()
         self.images = input['images']
         self.voxels = input['voxels']
         bs, nimgs, h, w, c = self.images.shape
@@ -45,9 +43,9 @@ class Transform2D(BaseModel):
         return x
     
     def backward(self):
-      bs, c1, c2, c3 = self.x
+      bs, c1, c2, c3 = self.x.shape
       target = self.voxels
-      target_repeated = torch.repeat_interleave(target,bs,dim=23)
+      target_repeated = torch.repeat_interleave(target,bs,dim=0)
       self.loss = self.criterion(self.x,target_repeated)
       self.loss.backward()
       # Move target to device here
@@ -60,10 +58,12 @@ class Transform2D(BaseModel):
         self.optimizer.step()
         
     
-    def get_loss(self, x):
+    def get_loss(self):
         return  OrderedDict([
             ('loss', self.loss.data),
         ])
+    #def to(device):
+        
 
 
      

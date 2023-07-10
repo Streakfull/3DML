@@ -25,7 +25,7 @@ class Transformer (nn.Module):
             for i in range(num_linear_layers):
                  d_model_next = d_model * 2
                  linear = nn.Linear(d_model,d_model_next)
-                 activation = nn.Softmax()
+                 activation = nn.Softmax(dim=-1)
                  d_model = d_model_next
                  self.sequential.append(linear)
                  if(i != num_linear_layers-1):

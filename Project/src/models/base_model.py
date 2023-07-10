@@ -48,8 +48,8 @@ class BaseModel(torch.nn.Module):
     # def eval(self):
     #     pass
 
-    def to(self, device):
-        pass
+#     def to(self, device):
+#         pass
 
     def inference(self):
         pass
