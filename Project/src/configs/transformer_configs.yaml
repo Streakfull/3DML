@@ -1,3 +1,5 @@
 d_model: 1024
-nhead: 8
-num_layers: 6
+nhead: 2
+num_layers: 2
+num_transformers: 2
+num_linear_layers: 2

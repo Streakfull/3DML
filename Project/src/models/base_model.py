@@ -8,6 +8,10 @@ class BaseModel(torch.nn.Module):
     def name(self):
         return 'BaseModel'
 
+    def __init__(self):
+        super(BaseModel,self).__init__()
+    
+
     def initialize(self, opt):
         self.opt = opt
         self.is_train= opt.is_train
@@ -35,17 +39,14 @@ class BaseModel(torch.nn.Module):
     def step(self):
         pass
 
-    def get_image_paths(self):
-        pass
-
     def save(self, label):
         pass
 
-    def train(self):
-        pass
+    # def train(self):
+    #     pass
 
-    def eval(self):
-        pass
+    # def eval(self):
+    #     pass
 
     def to(self, device):
         pass
@@ -53,7 +54,7 @@ class BaseModel(torch.nn.Module):
     def inference(self):
         pass
 
-    def get_current_errors(self):
+    def get_loss(self):
         return 0
     
     def update_lr(self):

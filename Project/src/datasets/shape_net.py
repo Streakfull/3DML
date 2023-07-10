@@ -35,7 +35,7 @@ class ShapeNet(torch.utils.data.Dataset):
         self.items = self.get_items()
 
     def __len__(self):
-        if (self.is_overfit):
+        if (self.is_overfit and OVERFIT_DATASET_SIZE<len(self.items)):
             return OVERFIT_DATASET_SIZE
         return len(self.items)
 
@@ -94,4 +94,3 @@ class ShapeNet(torch.utils.data.Dataset):
     def move_batch_to_device(batch, device):
         batch['images'] = batch['images'].to(device)
         batch['voxels'] =  batch['voxels'].to(device)
-        pass

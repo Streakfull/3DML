@@ -39,9 +39,8 @@ class Encoder(nn.Module):
     n_fc_filters = [1024]
     inp_channels = 3
     
-    def __init__(self, in_channels, n_convfilter, n_fc_filters):
+    def __init__(self, in_channels=inp_channels, n_convfilter=n_convfilter, n_fc_filters=n_fc_filters):
         super(Encoder, self).__init__()
-
         self.conv1a = ConvBlock(in_channels,n_convfilter[0], kernel_size=7)
         self.conv1b = ConvBlock(n_convfilter[0], n_convfilter[0], kernel_size=3)
         self.pool1 = nn.MaxPool2d(kernel_size=(2,2), padding=1)
@@ -73,43 +72,43 @@ class Encoder(nn.Module):
         self.pool6 = nn.MaxPool2d(kernel_size=(2,2), padding=0, stride=1)
 
         self.flatten = nn.Flatten()
-        self.fc = nn.Linear(4096, 1024)
+        self.fc = nn.Linear(6400, 1024)
         self.relu = nn.LeakyReLU(0.01)
         
     def forward(self, x):
         x = self.conv1a(x)
         x = self.conv1b(x)
         x = self.pool1(x)
-        print("Output of layer1:", x.shape)
+        #print("Output of layer1:", x.shape)
         
         x = self.conv2a(x)
         x = self.conv2b(x)
         x = self.res2(x)
         x = self.pool2(x)
-        print("Output of layer2:", x.shape)
+        #print("Output of layer2:", x.shape)
         
         x = self.conv3a(x)
         x = self.conv3b(x)
         x = self.res3(x)
         x = self.pool3(x)
-        print("Output of layer3:", x.shape)
+        #print("Output of layer3:", x.shape)
         
         x = self.conv4a(x)
         x = self.conv4b(x)
         x = self.pool4(x)
-        print("Output of layer4:", x.shape)
+        #print("Output of layer4:", x.shape)
         
         x = self.conv5a(x)
         x = self.conv5b(x)
         x = self.res5(x)
         x = self.pool5(x)
-        print("Output of layer5:", x.shape)
+        #print("Output of layer5:", x.shape)
         
         x = self.conv6a(x)
         x = self.conv6b(x)
         x = self.res6(x)
         x = self.pool6(x)
-        print("Output of layer6:", x.shape)
+        #print("Output of layer6:", x.shape)
         
         x = self.flatten(x)
         x = self.fc(x)
