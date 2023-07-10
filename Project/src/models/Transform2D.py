@@ -15,9 +15,10 @@ class Transform2D(BaseModel):
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
         self.encoder = Encoder(in_channels=4)
         self.transformer = Transformer()
-        self.decoder = Decoder()
+        self.decoder = Decoder(in_channels=256)
         self.criterion_demo = torch.nn.BCELoss()
-        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.1))
+        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.3))
+        #self.cireterion = nn.
         self.optimizer = optim.Adam([p for p in self.parameters()], lr=configs["lr"])
         self.sigmoid = torch.nn.Sigmoid()
 
@@ -50,14 +51,15 @@ class Transform2D(BaseModel):
       #target_repeated = torch.repeat_interleave(target,bs,dim=0)
       #import pdb;pdb.set_trace()
       self.loss = self.criterion(self.x, target)
-      self.loss_demo = self.criterion_demo(self.sigmoid(self.x),target)
-      self.loss_demo.backward()
+      #self.loss_demo = self.criterion_demo(self.sigmoid(self.x),target)
+      self.loss.backward()
+      #self.loss_demo.backward()
       # Move target to device here
 
 
     def step(self, x):
-        x = self.forward(x)
         self.optimizer.zero_grad()
+        x = self.forward(x)
         self.backward()
         self.optimizer.step()
         
@@ -65,7 +67,7 @@ class Transform2D(BaseModel):
     def get_loss(self):
         return  OrderedDict([
             ('loss', self.loss.data),
-            ('loss_demo',self.loss_demo.data),
+           
         ])
     #def to(device):
         

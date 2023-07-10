@@ -1,5 +1,5 @@
 d_model: 1024
-nhead: 2
+nhead: 4
 num_layers: 2
 num_transformers: 4
 num_linear_layers: 0

@@ -12,8 +12,13 @@ class Transformer (nn.Module):
             num_transformers = configs['num_transformers']
             num_linear_layers = configs["num_linear_layers"]
             self.sequential = nn.Sequential()
-
-            for l in range(num_transformers):
+            encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
+            self.net = nn.TransformerEncoder(encoder_layer=encoder_layer, num_layers=num_layers)
+            self.linear1 = nn.Linear(1024,1024*2)
+            d_model = d_model * 2
+            #self.sequential.append(net)
+            
+            for l in range(1,num_transformers):
               encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
               net = nn.TransformerEncoder(encoder_layer=encoder_layer, num_layers=num_layers)
               d_model_next = d_model * 2
@@ -37,5 +42,10 @@ class Transformer (nn.Module):
          
 
     def forward(self, x):
+           shortcut = x
+           x = self.net(x)
+           x += shortcut
+           x  = self.linear1(x)
            x = self.sequential(x)
+           #import pdb;pdb.set_trace()
            return x

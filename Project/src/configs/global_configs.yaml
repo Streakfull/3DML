@@ -2,7 +2,7 @@ logs_dir: logs
 is_train: true
 name: testingOverfit
 device: cuda:0
-batch_size: 16
+batch_size: 32
 n_epochs: 500
 print_every: 300
 validate_every: 300

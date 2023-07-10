@@ -14,12 +14,12 @@ def iou(x_gt, x, thres):
     # compute iou
     # > 0 free space, < 0 occupied
     x_gt_mask = x_gt.clone().detach()
-    x_gt_mask[x_gt > thres_gt] = 0.
-    x_gt_mask[x_gt <= thres_gt] = 1.
+#     x_gt_mask[x_gt < thres_gt] = 0.
+#     x_gt_mask[x_gt >= thres_gt] = 1.
 
     x_mask = x.clone().detach()
-    x_mask[x > thres] = 0.
-    x_mask[x <= thres] = 1.
+    x_mask[x < thres] = 0.
+    x_mask[x >= thres] = 1.
 
     inter = torch.logical_and(x_gt_mask, x_mask)
     union = torch.logical_or(x_gt_mask, x_mask)

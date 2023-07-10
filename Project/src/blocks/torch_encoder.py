@@ -49,12 +49,12 @@ class Encoder(nn.Module):
         self.conv2b = ConvBlock(n_convfilter[1], n_convfilter[1], kernel_size=3)
         #1x1 conv. filter
         # self.conv2c = ConvBlock(n_convfilter[1], n_convfilter[1], kernel_size=1)
-        self.res2 = ResidualBlock(n_convfilter[1], kernel_size=3)
+        #self.res2 = ResidualBlock(n_convfilter[1], kernel_size=3)
         self.pool2 = nn.MaxPool2d(kernel_size=(2,2), padding=1)
         
         self.conv3a = ConvBlock(n_convfilter[1], n_convfilter[2], kernel_size=3)
         self.conv3b = ConvBlock(n_convfilter[2], n_convfilter[2], kernel_size=3)
-        self.res3 = ResidualBlock(n_convfilter[2], kernel_size=3)
+        #self.res3 = ResidualBlock(n_convfilter[2], kernel_size=3)
         self.pool3 = nn.MaxPool2d(kernel_size=(2,2), padding=1)
         
         self.conv4a = ConvBlock(n_convfilter[2], n_convfilter[3], kernel_size=3)
@@ -63,12 +63,12 @@ class Encoder(nn.Module):
         
         self.conv5a = ConvBlock(n_convfilter[3], n_convfilter[4], kernel_size=3)
         self.conv5b = ConvBlock(n_convfilter[4], n_convfilter[4], kernel_size=3)
-        self.res5 = ResidualBlock(n_convfilter[4], kernel_size=3)
+        #self.res5 = ResidualBlock(n_convfilter[4], kernel_size=3)
         self.pool5 = nn.MaxPool2d(kernel_size=(2,2), padding=1)
         
         self.conv6a = ConvBlock(n_convfilter[4], n_convfilter[5], kernel_size=3)
         self.conv6b = ConvBlock(n_convfilter[5], n_convfilter[5], kernel_size=3)
-        self.res6 = ResidualBlock(n_convfilter[5], kernel_size=3)
+        #self.res6 = ResidualBlock(n_convfilter[5], kernel_size=3)
         self.pool6 = nn.MaxPool2d(kernel_size=(2,2), padding=0, stride=1)
 
         self.flatten = nn.Flatten()
@@ -83,13 +83,13 @@ class Encoder(nn.Module):
         
         x = self.conv2a(x)
         x = self.conv2b(x)
-        x = self.res2(x)
+        #x = self.res2(x)
         x = self.pool2(x)
         #print("Output of layer2:", x.shape)
         
         x = self.conv3a(x)
         x = self.conv3b(x)
-        x = self.res3(x)
+        #x = self.res3(x)
         x = self.pool3(x)
         #print("Output of layer3:", x.shape)
         
@@ -100,13 +100,13 @@ class Encoder(nn.Module):
         
         x = self.conv5a(x)
         x = self.conv5b(x)
-        x = self.res5(x)
+        #x = self.res5(x)
         x = self.pool5(x)
         #print("Output of layer5:", x.shape)
         
         x = self.conv6a(x)
         x = self.conv6b(x)
-        x = self.res6(x)
+        #x = self.res6(x)
         x = self.pool6(x)
         #print("Output of layer6:", x.shape)
         

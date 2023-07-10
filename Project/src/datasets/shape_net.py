@@ -82,6 +82,7 @@ class ShapeNet(torch.utils.data.Dataset):
         return self.cat == "all"
 
     def get_shape_voxels(self, shapenet_key):
+        #print(shapenet_key,"KEY")
         with open(self.dataset_path / self.voxfoldername / shapenet_key / "model.binvox", "rb") as fptr:
             voxels = read_as_3d_array(fptr).astype(np.float32)
         return voxels
