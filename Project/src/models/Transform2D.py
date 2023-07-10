@@ -16,8 +16,10 @@ class Transform2D(BaseModel):
         self.encoder = Encoder(in_channels=4)
         self.transformer = Transformer()
         self.decoder = Decoder()
-        self.criterion = torch.nn.BCELoss()
-        self.optimizer = optim.Adam([p for p in self.parameters() if p.requires_grad == True], lr=configs["lr"])
+        self.criterion_demo = torch.nn.BCELoss()
+        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.1))
+        self.optimizer = optim.Adam([p for p in self.parameters()], lr=configs["lr"])
+        self.sigmoid = torch.nn.Sigmoid()
 
     def set_input(self, input):
         self.images = input['images']
@@ -44,10 +46,12 @@ class Transform2D(BaseModel):
     
     def backward(self):
       bs, c1, c2, c3 = self.x.shape
-      target = self.voxels
-      target_repeated = torch.repeat_interleave(target,bs,dim=0)
-      self.loss = self.criterion(self.x,target_repeated)
-      self.loss.backward()
+      target = self.voxels.squeeze(1)
+      #target_repeated = torch.repeat_interleave(target,bs,dim=0)
+      #import pdb;pdb.set_trace()
+      self.loss = self.criterion(self.x, target)
+      self.loss_demo = self.criterion_demo(self.sigmoid(self.x),target)
+      self.loss_demo.backward()
       # Move target to device here
 
 
@@ -61,6 +65,7 @@ class Transform2D(BaseModel):
     def get_loss(self):
         return  OrderedDict([
             ('loss', self.loss.data),
+            ('loss_demo',self.loss_demo.data),
         ])
     #def to(device):
         

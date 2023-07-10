@@ -30,7 +30,7 @@ class ResidualBlock(nn.Module):
     
         x = x + shortcut
         x = self.conv3(x)
-        x = nn.LeakyReLU(0.01)(x)
+        x = nn.LeakyReLU(0.1)(x)
         return x
 
 # Define the model
@@ -73,7 +73,7 @@ class Encoder(nn.Module):
 
         self.flatten = nn.Flatten()
         self.fc = nn.Linear(6400, 1024)
-        self.relu = nn.LeakyReLU(0.01)
+        self.relu = nn.LeakyReLU(0.1)
         
     def forward(self, x):
         x = self.conv1a(x)

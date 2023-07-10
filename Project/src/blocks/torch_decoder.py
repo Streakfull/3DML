@@ -30,7 +30,7 @@ class ResidualBlock(nn.Module):
     
         x = x + shortcut
         x = self.conv3(x)
-        x = nn.LeakyReLU(0.01)(x)
+        x = nn.LeakyReLU(0.1)(x)
         return x
 
 class TripleResidualBlock(nn.Module):
@@ -57,7 +57,7 @@ class TripleResidualBlock(nn.Module):
 
 # Define the model
 class Decoder(nn.Module):
-    n_deconvfilter = [128, 128, 128, 64, 32, 2]
+    n_deconvfilter = [128, 128, 128, 64, 32, 1]
     
     def __init__(self, in_channels=256, n_deconvfilter=n_deconvfilter):
         super(Decoder, self).__init__()
@@ -123,7 +123,7 @@ class Decoder(nn.Module):
         x = self.conv5a(x)
         #print("Output of layer5:", x.shape)
         
-        x = self.softmax(x)
+        #x = self.softmax(x)
         return x[:, 0, :, :, :]
 
 # n_deconvfilter = [128, 128, 128, 64, 32, 2]

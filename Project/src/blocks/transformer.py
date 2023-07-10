@@ -17,10 +17,14 @@ class Transformer (nn.Module):
               encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
               net = nn.TransformerEncoder(encoder_layer=encoder_layer, num_layers=num_layers)
               d_model_next = d_model * 2
-              linear = nn.Linear(d_model,d_model_next)
+              linear1 = nn.Linear(d_model,d_model_next)
+              activation = nn.LeakyReLU(0.1)
+              linear2 = nn.Linear(d_model_next,d_model_next)
               d_model = d_model_next
               self.sequential.append(net)
-              self.sequential.append(linear)
+              self.sequential.append(linear1)
+              #self.sequential.append(activation)
+              #self.sequential.append(linear2)
 
             for i in range(num_linear_layers):
                  d_model_next = d_model * 2

@@ -42,7 +42,7 @@ class ShapeNet(torch.utils.data.Dataset):
     def __getitem__(self, index):
         shape_key = self.items[index]
         voxels = self.get_shape_voxels(shape_key)
-        images = self.get_shape_rendering_images(shape_key)
+        images = self.get_shape_rendering_images(shape_key)[0]
         return {
             "voxels": voxels[np.newaxis, :, :, :],
             "images": images[np.newaxis, :, :, :]
@@ -92,5 +92,5 @@ class ShapeNet(torch.utils.data.Dataset):
 
     @staticmethod
     def move_batch_to_device(batch, device):
-        batch['images'] = batch['images'].to(device)
-        batch['voxels'] =  batch['voxels'].to(device)
+        batch['images'] = batch['images'].float().to(device)
+        batch['voxels'] =  batch['voxels'].float().to(device)
