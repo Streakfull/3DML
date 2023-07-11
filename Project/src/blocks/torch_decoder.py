@@ -67,23 +67,23 @@ class Decoder(nn.Module):
 
         self.conv1a = ConvBlock(in_channels,n_deconvfilter[1], kernel_size=3)
         self.conv1b = ConvBlock(n_deconvfilter[1], n_deconvfilter[1], kernel_size=3)
-        #self.res1 = ResidualBlock(n_deconvfilter[1], kernel_size=3)
+        self.res1 = ResidualBlock(n_deconvfilter[1], kernel_size=3)
         self.unpool1 = nn.MaxUnpool3d(kernel_size=2, padding=1)
         
         self.conv2a = ConvBlock(n_deconvfilter[1], n_deconvfilter[2], kernel_size=3)
         self.conv2b = ConvBlock(n_deconvfilter[2], n_deconvfilter[2], kernel_size=3)
-        #self.res2 = ResidualBlock(n_deconvfilter[2], kernel_size=3)
+        self.res2 = ResidualBlock(n_deconvfilter[2], kernel_size=3)
         self.unpool2 = nn.MaxUnpool3d(kernel_size=2, padding=1)
 
         self.conv3a = ConvBlock(n_deconvfilter[2], n_deconvfilter[3], kernel_size=3)
         self.conv3b = ConvBlock(n_deconvfilter[3], n_deconvfilter[3], kernel_size=3)
-        #self.res3 = ResidualBlock(n_deconvfilter[3], kernel_size=3)
+        self.res3 = ResidualBlock(n_deconvfilter[3], kernel_size=3)
         self.unpool3 = nn.MaxUnpool3d(kernel_size=2, padding=1)
         
         self.conv4a = ConvBlock(n_deconvfilter[3], n_deconvfilter[4], kernel_size=3)
         self.conv4b = ConvBlock(n_deconvfilter[4], n_deconvfilter[4], kernel_size=3)
         self.conv4c = ConvBlock(n_deconvfilter[4], n_deconvfilter[4], kernel_size=3)
-        #self.res4 = TripleResidualBlock(n_deconvfilter[4], kernel_size=3)
+        self.res4 = TripleResidualBlock(n_deconvfilter[4], kernel_size=3)
         self.unpool4 = nn.MaxUnpool3d(kernel_size=2, padding=2)
         
         self.conv5a = ConvBlock(n_deconvfilter[4], n_deconvfilter[5], kernel_size=3)
@@ -94,14 +94,14 @@ class Decoder(nn.Module):
         x = self.unpool1(pooled_tensor, indices)
         x = self.conv1a(x)
         x = self.conv1b(x)
-        #x = self.res1(x)
+        x = self.res1(x)
    
    
         pooled_tensor, indices = self.initialpool(x)
         x = self.unpool2(pooled_tensor, indices)
         x = self.conv2a(x)
         x = self.conv2b(x)
-        #x = self.res2(x)
+        x = self.res2(x)
 
   
         pooled_tensor, indices = self.initialpool(x)
@@ -109,14 +109,14 @@ class Decoder(nn.Module):
         x = self.conv3a(x)
         x = self.conv3b(x)
 
-        #x = self.res3(x)
+        x = self.res3(x)
 
         pooled_tensor, indices = self.initialpool(x)
         x = self.unpool4(pooled_tensor, indices)
         x = self.conv4a(x)
         x = self.conv4b(x)
         x = self.conv4c(x)
-        #x = self.res4(x)
+        x = self.res4(x)
    
         #print("Output of layer4:", x.shape)
         

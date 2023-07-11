@@ -28,7 +28,7 @@ class Transform2D(BaseModel):
         bs, nimgs, h, w, c = self.images.shape
         self.bs = bs
         self.images = rearrange(self.images,'bs nimgs h w c -> (bs nimgs) c h w')
-        self.images = torch.Tensor(self.images)
+        #self.images = torch.Tensor(self.images)
       
     
 
