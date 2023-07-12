@@ -7,27 +7,29 @@ import torch
 from torch import nn,optim
 from einops import rearrange
 import omegaconf
+from blocks.patch_encoder import PatchEncoder
 
 
 class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
-        self.encoder = Encoder(in_channels=4)
-        self.transformer = Transformer()
-        self.decoder = Decoder(in_channels=256)
-        self.criterion_demo = torch.nn.BCELoss()
-        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.3))
-        #self.cireterion = nn.
+        self.patch_encoder = PatchEncoder()
+        #self.encoder = Encoder(in_channels=4)
+        # self.transformer = Transformer()
+        # self.decoder = Decoder(in_channels=256)
+        # self.criterion_demo = torch.nn.BCELoss()
+        # self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.3))
+        # #self.cireterion = nn.
         self.optimizer = optim.Adam([p for p in self.parameters()], lr=configs["lr"])
-        self.sigmoid = torch.nn.Sigmoid()
+        # self.sigmoid = torch.nn.Sigmoid()
 
     def set_input(self, input):
         self.images = input['images']
         self.voxels = input['voxels']
         bs, nimgs, h, w, c = self.images.shape
         self.bs = bs
-        self.images = rearrange(self.images,'bs nimgs h w c -> (bs nimgs) c h w')
+        self.images = rearrange(self.images,'bs nimgs c h w -> (bs nimgs) c h w')
         #self.images = torch.Tensor(self.images)
       
     
@@ -35,11 +37,12 @@ class Transform2D(BaseModel):
     def forward(self, x):
         ## Encode
         self.set_input(x)
-        x = self.encoder(self.images)  # bs x nimgs x 1024
-        # Pass through transformer
-        x = self.transformer(x)    # bs x nimgs x 32768
-        x = rearrange(x, 'bs (c i j k) -> bs c i j k', c = 256, i=4 , j=4, k=4)
-        x = self.decoder(x)
+        x = self.patch_encoder(self.images)  # (bs x nimgs) x 768
+        import pdb;pdb.set_trace()
+        # # Pass through transformer
+        # x = self.transformer(x)    # bs x nimgs x 32768
+        # x = rearrange(x, 'bs (c i j k) -> bs c i j k', c = 256, i=4 , j=4, k=4)
+        # x = self.decoder(x)
 
         #import pdb;pdb.set_trace()
         self.x = x

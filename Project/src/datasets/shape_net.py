@@ -11,6 +11,7 @@ from utils.constants import (OVERFIT_DATASET_SIZE,
                              IMAGE_RESOLUTION)
 from utils.binvox_rw import read_as_3d_array
 from PIL import Image
+from einops import rearrange
 
 
 class ShapeNet(torch.utils.data.Dataset):
@@ -43,6 +44,9 @@ class ShapeNet(torch.utils.data.Dataset):
         shape_key = self.items[index]
         voxels = self.get_shape_voxels(shape_key)
         images = self.get_shape_rendering_images(shape_key)[0]
+        
+        #images = rearrange(images,'bs h w c -> bs c h w')
+        images = rearrange(images, 'h w c -> c h w')
         return {
             "voxels": voxels[np.newaxis, :, :, :],
             "images": images[np.newaxis, :, :, :]

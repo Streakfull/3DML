@@ -42,6 +42,8 @@ def visualize_images(images, rows=5):
     columns = nimages//rows
     if (nimages % rows != 0):
         rows += 1
+    if(columns == 0):
+        columns = 1
     fig = plt.figure(figsize=(20, 20))
     for i, img in enumerate(images):
         fig.add_subplot(rows, columns, i+1)
