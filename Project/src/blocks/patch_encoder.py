@@ -19,7 +19,7 @@ class PatchEncoder(nn.Module):
 
     def forward(self, images):
       self.set_input(images)
-      embedded_patches = self.patch_embedding(self.patches, self.patch_size, self.patch_size)
+      embedded_patches = self.patch_embedding(self.patches)
       positions = torch.arange(self.N).to(images.device)
       pos_embedding = self.pos_embedding(positions)
       embedding = embedded_patches + pos_embedding
@@ -36,7 +36,7 @@ class PatchEncoder(nn.Module):
       return x_cubes
     
     def set_input(self, images):
-       self.patches = self.patch(images).float() # bs x 4 x 13 x 13
+       self.patches = self.patch(images,kernel_size=self.patch_size, stride=self.patch_size).float() # bs x 4 x 13 x 13
        self.patches = self.patches.flatten(start_dim=2)
      
        

@@ -8,7 +8,7 @@ class TransformerDecoder (nn.Module):
     def __init__(self, configs):
             super().__init__()
             d_model = configs["d_model"]
-            nhead = configs["d_head"]
+            nhead = configs["nhead"]
             num_layers = configs["num_layers"]
             self.num_pos_embeddings = configs["num_pos_embeddings"]
             decoder_layer = nn.TransformerDecoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
