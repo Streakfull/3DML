@@ -1,7 +1,7 @@
 import math
 import torch.nn.functional as F
 import torch.nn as nn
-from empatches import EMPatches
+#from empatches import EMPatches
 import torch
 from einops import rearrange,repeat
 
@@ -17,7 +17,7 @@ class PatchEncoder(nn.Module):
     def forward(self, images):
       self.set_input(images)
       embedded_patches = self.patch_embedding(self.patches)
-      positions = torch.arange(self.N)
+      positions = torch.arange(self.N).to(images.device)
       pos_embedding = self.pos_embedding(positions)
       embedding = embedded_patches + pos_embedding
       return embedding
