@@ -11,7 +11,7 @@ from blocks.patch_encoder import PatchEncoder
 from blocks.transformer_decoder import TransformerDecoder
 from blocks.simple_decoder import SimpleDecoder
 
-
+# TODO: Handle criterion from configs
 class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
@@ -21,7 +21,7 @@ class Transform2D(BaseModel):
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
         self.criterion_demo = torch.nn.BCELoss()
-        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.8))
+        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(configs["pos_weight"]))
         self.optimizer = optim.Adam(params=self.parameters(), lr=configs["lr"])
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=20, gamma=0.5)
         self.sigmoid = torch.nn.Sigmoid()

@@ -10,7 +10,7 @@ validate_every: 300
 model:
   lr: 0.0001
   criterion: BCE #BCE | BCE_LOGITS | WEIGHTED_BCE_LOGITS
-  pos_weight: 1.8 # Only used if the loss value is WEIGHTED_BCE_LOGITS - weight of positive class
+  pos_weight: 2.5 # Only used if the loss value is WEIGHTED_BCE_LOGITS - weight of positive class
 
   encoder:
     patch_size: 13
