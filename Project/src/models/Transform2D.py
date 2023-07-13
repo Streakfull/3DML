@@ -16,18 +16,12 @@ class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
-        self.patch_encoder = PatchEncoder()
-        self.transformer_encoder = TransformerEncoder()
-        self.transformer_decoder = TransformerDecoder()
-        #self.decoder = Decoder(in_channels=768)
+        self.patch_encoder = PatchEncoder(configs["encoder"])
+        self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
+        self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
-        
-        #self.encoder = Encoder(in_channels=4)
-        # self.transformer = Transformer()
-        # self.decoder = Decoder(in_channels=256)
         self.criterion_demo = torch.nn.BCELoss()
-        self.criterion = nn.BCEWithLogitsLoss(reduction="sum", pos_weight=torch.tensor(1.8))
-        # #self.cireterion = nn.
+        self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.8))
         self.optimizer = optim.Adam(params=self.parameters(), lr=configs["lr"])
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=20, gamma=0.5)
         self.sigmoid = torch.nn.Sigmoid()
@@ -56,13 +50,9 @@ class Transform2D(BaseModel):
     def backward(self):
       bs, c1, c2, c3 = self.x.shape
       target = self.voxels.squeeze(1)
-      #target_repeated = torch.repeat_interleave(target,bs,dim=0)
-      #import pdb;pdb.set_trace()
-      self.loss = self.criterion(self.x, target)/bs
+      self.loss = self.criterion(self.x, target)
       self.loss_demo = self.criterion_demo(self.sigmoid(self.x),target)
       self.loss.backward()
-      #self.loss_demo.backward()
-      # Move target to device here
 
 
     def step(self, x):
@@ -78,7 +68,6 @@ class Transform2D(BaseModel):
             ('loss_demo',self.loss_demo.data),
            
         ])
-    #def to(device):
         
 
 

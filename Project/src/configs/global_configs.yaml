@@ -9,3 +9,22 @@ validate_every: 300
 
 model:
   lr: 0.0001
+  criterion: BCE #BCE | BCE_LOGITS | WEIGHTED_BCE_LOGITS
+  pos_weight: 1.8 # Only used if the loss value is WEIGHTED_BCE_LOGITS - weight of positive class
+
+  encoder:
+    patch_size: 13
+    sequence_length: 121
+    embedding_dim: 768
+    patch_padding: 3
+
+  transformer_encoder:
+    d_model: 768
+    nhead: 12
+    num_layers: 12
+
+  transformer_decoder:
+    d_model: 768
+    nhead: 12
+    num_layers: 8
+    num_pos_embeddings: 64

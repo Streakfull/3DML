@@ -1,5 +1,0 @@
-d_model: 768
-nhead: 12
-num_layers: 12
-num_transformers: 0
-num_linear_layers: 0
