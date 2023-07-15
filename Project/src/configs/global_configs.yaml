@@ -4,5 +4,5 @@ name: setup3
 device: cuda:0
 batch_size: 16
 n_epochs: 1
-print_every: 300
-validate_every: 300
+print_every: 50
+validate_every: 50
