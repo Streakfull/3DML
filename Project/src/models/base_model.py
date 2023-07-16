@@ -39,8 +39,10 @@ class BaseModel(torch.nn.Module):
     def step(self):
         pass
 
-    def save(self, label):
-        pass
+    def save(self, path, epoch="latest"):
+         checkpoint_name =  f"{path}/epoch-{epoch}.ckpt"
+         cprint(f"{checkpoint_name} created", "blue")
+         torch.save(self.state_dict(), checkpoint_name)
 
     # def train(self):
     #     pass
