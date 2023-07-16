@@ -78,6 +78,7 @@ class Transform2D(BaseModel):
         bs, nimgs, h, w, c = self.images.shape
         self.bs = bs
         self.images = rearrange(self.images,'bs nimgs c h w -> (bs nimgs) c h w')
+        self.nimgs = nimgs
         #self.images = torch.Tensor(self.images)
       
     
@@ -86,6 +87,9 @@ class Transform2D(BaseModel):
         ## Encode
         self.set_input(x)
         x = self.patch_encoder(self.images)  # bs x n_patches x 768
+        if(self.nimgs > 1):
+            x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
+            x = x.mean(dim=1)
         x = self.transformer_encoder(x)
         x = self.transformer_decoder(x)
         x = rearrange(x,'bs (c1 c2 c3) d -> bs d c1 c2 c3', c1=4,c2=4,c3=4)

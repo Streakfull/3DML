@@ -34,7 +34,7 @@ class ShapeNet(torch.utils.data.Dataset):
         self.rendering_nimages = RENDERINGS_PER_SHAPE
         self.image_indices = np.arange(self.rendering_nimages)
         self.items = self.get_items()
-        self.nimgs = 1
+        self.nimgs = nimgs
 
     def __len__(self):
         if (self.is_overfit and OVERFIT_DATASET_SIZE<len(self.items)):
@@ -45,17 +45,17 @@ class ShapeNet(torch.utils.data.Dataset):
         shape_key = self.items[index]
         voxels = self.get_shape_voxels(shape_key)
         images = self.get_shape_rendering_images(shape_key)
-        self.nimgs = 1
         if(self.nimgs == 1):
             images = images[0]
             images = rearrange(images, 'h w c -> c h w')
+            images = images[np.newaxis, :, :, :]
         else:
             images = images[0:self.nimgs]
             images = rearrange(images,'nimgs h w c -> nimgs c h w')
-    
+        #import pdb;pdb.set_trace()
         return {
             "voxels": voxels[np.newaxis, :, :, :],
-            "images": images[np.newaxis, :, :, :]
+            "images": images
         }
 
     def get_items(self):
