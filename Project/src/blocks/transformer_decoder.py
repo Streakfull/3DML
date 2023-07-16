@@ -14,6 +14,7 @@ class TransformerDecoder (nn.Module):
             decoder_layer = nn.TransformerDecoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
             self.net = nn.TransformerDecoder(decoder_layer=decoder_layer, num_layers=num_layers)
             self.pos_embeddings = nn.Embedding(self.num_pos_embeddings, d_model)
+            self.layer_norm = nn.LayerNorm(d_model)
             
 
     def forward(self, x):
@@ -22,6 +23,8 @@ class TransformerDecoder (nn.Module):
           embeddings = self.pos_embeddings(positions)
           embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)
           x = self.net(embeddings, x)
+          x = self.layer_norm(x)
+            
           return x
             
             

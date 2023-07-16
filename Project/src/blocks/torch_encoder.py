@@ -35,12 +35,12 @@ class ResidualBlock(nn.Module):
 
 # Define the model
 class Encoder(nn.Module):
-    n_convfilter = [96, 128, 256, 256, 256, 256]
+    n_convfilter = [96, 128, 256, 256, 256, 128]
     n_fc_filters = [1024]
-    inp_channels = 3
+    inp_channels = 4
     
     def __init__(self, in_channels=inp_channels, n_convfilter=n_convfilter, n_fc_filters=n_fc_filters):
-        super(Encoder, self).__init__()
+        super().__init__()
         self.conv1a = ConvBlock(in_channels,n_convfilter[0], kernel_size=7)
         self.conv1b = ConvBlock(n_convfilter[0], n_convfilter[0], kernel_size=3)
         self.pool1 = nn.MaxPool2d(kernel_size=(2,2), padding=1)
@@ -71,9 +71,9 @@ class Encoder(nn.Module):
         self.res6 = ResidualBlock(n_convfilter[5], kernel_size=3)
         self.pool6 = nn.MaxPool2d(kernel_size=(2,2), padding=0, stride=1)
 
-        self.flatten = nn.Flatten()
-        self.fc = nn.Linear(6400, 1024)
-        self.relu = nn.LeakyReLU(0.1)
+#         self.flatten = nn.Flatten()
+#         self.fc = nn.Linear(6400, 1024)
+#         self.relu = nn.LeakyReLU(0.1)
         
     def forward(self, x):
         x = self.conv1a(x)
@@ -110,9 +110,11 @@ class Encoder(nn.Module):
         x = self.pool6(x)
         #print("Output of layer6:", x.shape)
         
-        x = self.flatten(x)
-        x = self.fc(x)
-        x = self.relu(x)
+#         x = self.flatten(x)
+#         x = self.fc(x)
+#         x = self.relu(x)
+        x = x.flatten(start_dim=2)
+        #import pdb;pdb.set_trace()
         
         return x
 
