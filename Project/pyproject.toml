@@ -21,6 +21,7 @@ scipy = "^1.4.1"
 numpy = "^1.19.4"
 ipywidgets = "7.7.1"
 jupyterlab-widgets = "1.1"
+theano = "^0.8"
 
 [tool.poetry.dev-dependencies]
 

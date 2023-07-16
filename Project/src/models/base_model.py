@@ -4,9 +4,13 @@ import torch
 import utils.util as util
 
 # modified from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
-class BaseModel():
+class BaseModel(torch.nn.Module):
     def name(self):
         return 'BaseModel'
+
+    def __init__(self):
+        super(BaseModel,self).__init__()
+    
 
     def initialize(self, opt):
         self.opt = opt
@@ -35,16 +39,27 @@ class BaseModel():
     def step(self):
         pass
 
-    def get_image_paths(self):
+    def save(self, path, epoch="latest"):
+         checkpoint_name =  f"{path}/epoch-{epoch}.ckpt"
+         cprint(f"{checkpoint_name} created", "blue")
+         torch.save(self.state_dict(), checkpoint_name)
+
+    # def train(self):
+    #     pass
+
+    # def eval(self):
+    #     pass
+
+#     def to(self, device):
+#         pass
+
+    def inference(self):
         pass
 
-    def save(self, label):
-        pass
-
-    def train(self,label):
-        pass
-
-    def eval(self,label):
+    def get_loss(self):
+        return 0
+    
+    def update_lr(self):
         pass
 
 
