@@ -100,7 +100,7 @@ class Transform2D(BaseModel):
       self.loss = self.criterion(self.x, target)
       #import pdb;pdb.set_trace()
       #self.loss_demo = self.criterion_demo(self.sigmoid(self.x),target)
-      self.loss.backward()
+     
     
     
     def dice_loss(self,logits,labels):
@@ -122,9 +122,11 @@ class Transform2D(BaseModel):
         
 
     def step(self, x):
+        self.train()
         self.optimizer.zero_grad()
         x = self.forward(x)
         self.backward()
+        self.loss.backward()
         self.optimizer.step()
         
     
@@ -134,6 +136,12 @@ class Transform2D(BaseModel):
             ('loss_demo', 0),
            
         ])
+    
+    def inference(self, x):
+        self.eval()
+        x = self.forward(x)
+        self.backward()
+        
         
 
 

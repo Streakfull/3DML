@@ -1,13 +1,13 @@
 logs_dir: logs
 is_train: true
-name: testingOverfit
+name: trainingV8
 device: cuda:0
 batch_size: 8
-n_epochs: 500
-print_every: 300
-validate_every: 300
-save_every: 5000
-save_every_epochs: 3
+n_epochs: 100
+print_every: 20
+validate_every: 30
+save_every: 50
+save_every_nepochs: 10
 
 model:
   lr: 0.0001

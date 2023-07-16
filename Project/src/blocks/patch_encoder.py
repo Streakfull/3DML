@@ -33,12 +33,12 @@ class PatchEncoder(nn.Module):
     
       #self.set_input(images)
 #       embedded_patches = self.patch_embedding(self.patches)
-      positions = torch.arange(self.N).to(images.device)
+      positions = torch.arange(self.N).to(x.device)
       pos_embedding = self.pos_embedding(positions)
       x = x + pos_embedding   
        #embedding = embedded_patches[:,self.random_indices,:] + pos_embedding[self.random_indices]
       #import pdb;pdb.set_trace()
-      return embedded_patches
+      return x
        
 
 
