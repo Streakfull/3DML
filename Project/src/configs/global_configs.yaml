@@ -1,6 +1,6 @@
 logs_dir: logs
 is_train: true
-name: trainingV10
+name: trainingV15
 device: cuda:0
 batch_size: 8
 n_epochs: 100
