@@ -10,6 +10,7 @@ import omegaconf
 from blocks.patch_encoder import PatchEncoder
 from blocks.transformer_decoder import TransformerDecoder
 from blocks.simple_decoder import SimpleDecoder
+from utils.util import iou
 
 
 
@@ -130,12 +131,19 @@ class Transform2D(BaseModel):
         self.optimizer.step()
         
     
-    def get_loss(self):
+    def get_metrics(self):
+        iou_val = self.get_iou()
         return  OrderedDict([
             ('loss', self.loss.data),
-            ('loss_demo', 0),
+            ('iou', iou_val),
            
         ])
+    
+    def get_iou(self):
+        #import pdb;pdb.set_trace()
+        gt =  target = self.voxels.squeeze(1)
+        iou_val = iou(gt, self.x, 0.5)
+        return iou_val.mean()
     
     def inference(self, x):
         self.eval()
