@@ -19,7 +19,7 @@ class TransformerEncoder (nn.Module):
             num_layers = configs["num_layers"]
             encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, batch_first=True)
             self.net = nn.TransformerEncoder(encoder_layer=encoder_layer, num_layers=num_layers)
-            
+            #self.pos_embeddings = nn.Embedding(self.num_pos_embeddings + 2 , d_model)
 
     def forward(self, x):
           x = self.net(x)

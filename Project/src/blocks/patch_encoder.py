@@ -6,10 +6,11 @@ import torch
 from einops import rearrange,repeat
 import transformers
 from cprint import *
+from timm.models.vision_transformer import (
+    trunc_normal_,
+)
 
-# from timm.models.vision_transformer import (
-#         HybridEmbed,
-#         PatchEmbed)
+
 
 from timm.models.vision_transformer import PatchEmbed
 from timm.models.vision_transformer_hybrid import HybridEmbed   
@@ -23,18 +24,25 @@ class PatchEncoder(nn.Module):
       self.embedding_dim = configs["embedding_dim"]
       self.padding = configs["patch_padding"]
       self.in_features = self.patch_size * self.patch_size * self.channels
-      self.pos_embedding = nn.Embedding(self.N, self.embedding_dim)
-      #self.patch_embedding = nn.Linear(in_features=self.in_features,out_features=self.embedding_dim)
+      self.pos_embedding = nn.Embedding(self.N + 2, self.embedding_dim)
       self.patch_embed = PatchEmbed(
                 img_size=137, patch_size=13, in_chans=4, embed_dim=768)
+      self.dist_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
+      self.cls_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
+      trunc_normal_(self.dist_token, std=.02)
+      trunc_normal_(self.cls_token, std=.02)
 
     def forward(self, x):
       x = self.patch_embed(x)
-    
+      self.bs = x.shape[0]
       #self.set_input(images)
 #       embedded_patches = self.patch_embedding(self.patches)
-      positions = torch.arange(self.N).to(x.device)
+      positions = torch.arange(self.N + 2).to(x.device)
       pos_embedding = self.pos_embedding(positions)
+      cls_tokens = self.cls_token.expand(self.bs, -1, -1)
+      dist_token = self.dist_token.expand(self.bs, -1, -1)
+      x = torch.cat((cls_tokens, dist_token, x), dim=1)  
+    
       x = x + pos_embedding   
        #embedding = embedded_patches[:,self.random_indices,:] + pos_embedding[self.random_indices]
       #import pdb;pdb.set_trace()
