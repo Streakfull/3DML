@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import torch
 import json
+from PIL import Image, ImageFile
 from utils.constants import (OVERFIT_DATASET_SIZE,
                              DATASET_PATH,
                              VOX_FOLDERNAME,
@@ -12,6 +13,34 @@ from utils.constants import (OVERFIT_DATASET_SIZE,
 from utils.binvox_rw import read_as_3d_array
 from PIL import Image
 from einops import rearrange
+from datasets.transforms import *
+
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+def normalize(x):
+    return x * 2 - 1
+
+
+def denormalize(x):
+    return (x + 1) / 2
+
+
+
+def to_numpy(image):
+    image.convert("RGB")
+    return [np.asarray(image, dtype=np.float32) / 255]
+
+image_trans = Compose([
+        to_numpy,
+        CenterCrop((224, 224), (128, 128)),
+        RandomBackground(((240, 240), (240, 240), (240, 240))),
+        #ToTensor(),
+        lambda x: x[0],
+        normalize
+    ])
+
+# ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 class ShapeNet(torch.utils.data.Dataset):
@@ -35,6 +64,8 @@ class ShapeNet(torch.utils.data.Dataset):
         self.image_indices = np.arange(self.rendering_nimages)
         self.items = self.get_items()
         self.nimgs = nimgs
+        self.background=(255, 255, 255),
+        self.image_transforms = image_trans
 
     def __len__(self):
         if (self.is_overfit and OVERFIT_DATASET_SIZE<len(self.items)):
@@ -45,6 +76,14 @@ class ShapeNet(torch.utils.data.Dataset):
         shape_key = self.items[index]
         voxels = self.get_shape_voxels(shape_key)
         images = self.get_shape_rendering_images(shape_key)
+        images = self.transform_images(images)
+        #import pdb;pdb.set_trace()
+        return {
+            "voxels": voxels[np.newaxis, :, :, :],
+            "images": images
+        }
+    
+    def transform_images(self, images):
         if(self.nimgs == 1):
             images = images[0]
             images = rearrange(images, 'h w c -> c h w')
@@ -52,11 +91,7 @@ class ShapeNet(torch.utils.data.Dataset):
         else:
             images = images[0:self.nimgs]
             images = rearrange(images,'nimgs h w c -> nimgs c h w')
-        #import pdb;pdb.set_trace()
-        return {
-            "voxels": voxels[np.newaxis, :, :, :],
-            "images": images
-        }
+        return images
 
     def get_items(self):
         items = []
@@ -76,8 +111,12 @@ class ShapeNet(torch.utils.data.Dataset):
             image_key = f"0{image_number}" if image_number < 10 else image_number
             path = self.dataset_path / self.image_foldername / \
                 shapenet_key / "rendering" / f"{image_key}.png"
-            image = Image.open(path)
-            image_array = np.array(image)[np.newaxis, :, :, :]
+            rgba = Image.open(path)
+            image = Image.new("RGB", rgba.size, self.background)
+            image.paste(rgba, mask=rgba.split()[3])
+            image = self.image_transforms(image)
+            image_array = image[np.newaxis, :, :, :]
+            #image_array = image_array / 255
             images = image_array if images is None else np.vstack(
                 (images, image_array))
         return images

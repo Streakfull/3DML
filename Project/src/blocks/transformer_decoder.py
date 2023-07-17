@@ -20,9 +20,11 @@ class TransformerDecoder (nn.Module):
 
     def forward(self, x):
           self.bs = x.shape[0]
+          #import pdb;pdb.set_trace()
           #positions = torch.arange(self.num_pos_embeddings).to(x.device)
           self.get_gen_order()
           embeddings = self.pos_embeddings(self.gen_order.to(x.device))
+          #import pdb;pdb.set_trace()
           #embeddings = rearrange(embeddings, 'bs sq d -> (bs sq) d')
           #y = self.gen_order.flatten()
           #sorted_output = torch.zeros_like(embeddings)
@@ -30,7 +32,7 @@ class TransformerDecoder (nn.Module):
           #sorted_output = rearrange(embeddings, '(bs sq) d -> bs sq d', bs=self.bs, sq=self.num_pos_embeddings)
           #embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)
           #import pdb;pdb.set_trace()  
-          embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)   
+          #embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)   
           x = self.net(embeddings, x)
           x = self.layer_norm(x)
             
@@ -38,7 +40,7 @@ class TransformerDecoder (nn.Module):
     
     def get_gen_order(self):
         self.gen_order = np.arange(self.num_pos_embeddings)
-        repeated = repeat(self.gen_order, 'd -> repeat d', repeat=self.bs)
+        self.gen_order = repeat(self.gen_order, 'd -> repeat d', repeat=self.bs)
         #self.gen_order = self.rng.permuted(repeated, axis=1)
         self.gen_order = torch.tensor(self.gen_order)
        

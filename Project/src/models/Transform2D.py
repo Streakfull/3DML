@@ -48,7 +48,7 @@ class CEDiceLoss(nn.Module):
         super(CEDiceLoss, self).__init__()
         self.smooth = smooth
         self.dice = DiceLoss()
-        self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction)
+        self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction, pos_weight=torch.tensor(1.8))
 
     def forward(self, output, target):
         ce_loss = self.cross_entropy(output, target)
@@ -60,13 +60,9 @@ class Transform2D(BaseModel):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
         self.patch_encoder = PatchEncoder(configs["encoder"])
-        #self.patch_encoder = Encoder()
         self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
-        #self.criterion_demo = torch.nn.BCELoss()
-        #self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(configs["pos_weight"]))
-        #self.criterion = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(1.8))
         self.criterion = CEDiceLoss()
         self.optimizer = optim.Adam(params=self.parameters(), lr=1e-4)
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=15, gamma=0.5)
@@ -89,10 +85,15 @@ class Transform2D(BaseModel):
         x = self.patch_encoder(self.images)  # bs x n_patches x 768
         if(self.nimgs > 1):
             x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
+           # x = rearrange(x, '(bs nimgs) p -> bs nimgs p', bs=self.bs,nimgs=self.nimgs)
+            #import pdb;pdb.set_trace()
             x = x.mean(dim=1)
+        #import pdb;pdb.set_trace()
         x = self.transformer_encoder(x)
         x = self.transformer_decoder(x)
+      
         x = rearrange(x,'bs (c1 c2 c3) d -> bs d c1 c2 c3', c1=4,c2=4,c3=4)
+        #x = rearrange(x,'bs d (c1 c2 c3) -> bs d c1 c2 c3', c1=10,c2=10,c3=10)
         x = self.decoder(x)
         self.x = x.squeeze(1)
         return x

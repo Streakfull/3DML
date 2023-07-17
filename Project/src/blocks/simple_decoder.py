@@ -33,10 +33,12 @@ class SimpleDecoder(nn.Module):
 
     
      def forward(self,x):
+            #import pdb;pdb.set_trace()
             x = self.initial_conv(x)
             x = self.encoded_conv(x)
             x = self.conv_transpose(x)
             x = self.conv_transpose4(x)
+            #import pdb;pdb.set_trace()
             return x;
 
     
