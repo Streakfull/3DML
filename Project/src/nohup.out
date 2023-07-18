@@ -1,0 +1,37 @@
+[W 10:14:15.765 NotebookApp] Error loading server extension jupyter_lsp
+    Traceback (most recent call last):
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/notebookapp.py", line 2050, in init_server_extensions
+        func(self)
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyter_lsp/serverextension.py", line 76, in load_jupyter_server_extension
+        nbapp.io_loop.call_later(0, initialize, nbapp, virtual_documents_uri)
+    AttributeError: 'NotebookApp' object has no attribute 'io_loop'
+[I 10:14:15.782 NotebookApp] JupyterLab extension loaded from /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyterlab
+[I 10:14:15.782 NotebookApp] JupyterLab application directory is /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/share/jupyter/lab
+[I 10:14:15.786 NotebookApp] Serving notebooks from local directory: /mnt/hdd/streakfull/3DML/Project/src
+[I 10:14:15.786 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 10:14:15.786 NotebookApp] http://PC04:8888/?token=84d39c5d508acd72ad6755f8e1dd459f2f242b16a8871572
+[I 10:14:15.786 NotebookApp]  or http://127.0.0.1:8888/?token=84d39c5d508acd72ad6755f8e1dd459f2f242b16a8871572
+[I 10:14:15.786 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 10:14:15.788 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/youssef/.local/share/jupyter/runtime/nbserver-22543-open.html
+    Or copy and paste one of these URLs:
+        http://PC04:8888/?token=84d39c5d508acd72ad6755f8e1dd459f2f242b16a8871572
+     or http://127.0.0.1:8888/?token=84d39c5d508acd72ad6755f8e1dd459f2f242b16a8871572
+[I 10:15:01.236 NotebookApp] Saving file at /train.ipynb
+[W 10:15:37.126 NotebookApp] 404 DELETE /api/sessions/ae79f8a2-d36d-4f89-aaad-70ee2450f5b2 (131.159.40.158): Session not found: session_id='ae79f8a2-d36d-4f89-aaad-70ee2450f5b2'
+[W 10:15:37.127 NotebookApp] Session not found: session_id='ae79f8a2-d36d-4f89-aaad-70ee2450f5b2'
+[W 10:15:37.128 NotebookApp] 404 DELETE /api/sessions/ae79f8a2-d36d-4f89-aaad-70ee2450f5b2 (131.159.40.158) 3.720000ms referer=http://localhost:3600/notebooks/train.ipynb
+[I 10:15:37.319 NotebookApp] Kernel started: 740ce9e0-cca8-48b6-a936-8fc4d633b291, name: python3
+[I 10:17:00.887 NotebookApp] Saving file at /train.ipynb
+[I 10:24:53.071 NotebookApp] Kernel interrupted: 740ce9e0-cca8-48b6-a936-8fc4d633b291
+[I 10:24:55.636 NotebookApp] Starting buffering for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 10:24:56.376 NotebookApp] Kernel restarted: 740ce9e0-cca8-48b6-a936-8fc4d633b291
+[I 10:24:56.453 NotebookApp] Restoring connection for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 10:24:56.775 NotebookApp] Replaying 3 buffered messages
+[I 10:25:00.708 NotebookApp] Saving file at /train.ipynb
+[I 10:25:14.384 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 10:25:56.019 NotebookApp] Saving file at /train.ipynb
+[I 10:26:01.163 NotebookApp] Saving file at /train.ipynb
+[I 10:27:00.800 NotebookApp] Saving file at /train.ipynb

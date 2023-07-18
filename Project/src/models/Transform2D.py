@@ -11,7 +11,7 @@ from blocks.patch_encoder import PatchEncoder
 from blocks.transformer_decoder import TransformerDecoder
 from blocks.simple_decoder import SimpleDecoder
 from utils.util import iou
-
+from transformers import AutoImageProcessor, DeiTModel
 
 
 class DiceLoss(nn.Module):
@@ -59,14 +59,16 @@ class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
-        self.patch_encoder = PatchEncoder(configs["encoder"])
-        self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
+        #self.patch_encoder = PatchEncoder(configs["encoder"])
+        #self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
         self.criterion = CEDiceLoss()
         self.optimizer = optim.Adam(params=self.parameters(), lr=1e-4)
-        self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=15, gamma=0.5)
+        self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=25, gamma=0.5)
         self.sigmoid = torch.nn.Sigmoid()
+        self.deit_model = DeiTModel.from_pretrained("facebook/deit-base-distilled-patch16-224")
+        self.deit_model.eval()
 
     def set_input(self, input):
         self.images = input['images']
@@ -82,14 +84,21 @@ class Transform2D(BaseModel):
     def forward(self, x):
         ## Encode
         self.set_input(x)
-        x = self.patch_encoder(self.images)  # bs x n_patches x 768
-        if(self.nimgs > 1):
-            x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
-           # x = rearrange(x, '(bs nimgs) p -> bs nimgs p', bs=self.bs,nimgs=self.nimgs)
-            #import pdb;pdb.set_trace()
-            x = x.mean(dim=1)
+        #x = self.patch_encoder(self.images)  # bs x n_patches x 768
+#         if(self.nimgs > 1):
+#             x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
+#            # x = rearrange(x, '(bs nimgs) p -> bs nimgs p', bs=self.bs,nimgs=self.nimgs)
+#             #import pdb;pdb.set_trace()
+#             x = x.mean(dim=1)
         #import pdb;pdb.set_trace()
-        x = self.transformer_encoder(x)
+        #import pdb;pdb.set_trace()
+        #x = self.transformer_encoder(x)
+        x = self.deit_model(self.images).last_hidden_state
+        if(self.nimgs > 1):
+             x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
+             #x = rearrange(x, '(bs nimgs) p -> bs nimgs p', bs=self.bs,nimgs=self.nimgs)
+             x = x.mean(dim=1)
+        #import pdb;pdb.set_trace()
         x = self.transformer_decoder(x)
       
         x = rearrange(x,'bs (c1 c2 c3) d -> bs d c1 c2 c3', c1=4,c2=4,c3=4)

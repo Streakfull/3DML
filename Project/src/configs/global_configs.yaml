@@ -1,12 +1,13 @@
 logs_dir: logs
 is_train: true
-name: with_img_transforms_plz_work
+name: full_dataset_with_pretrained_6views_try5
 device: cuda:0
-batch_size: 16
+batch_size: 8
 n_epochs: 100
+append_loss_every: 50
 print_every: 150
-validate_every: 3000
-save_every: 3000
+validate_every: 45000
+save_every: 5000
 save_every_nepochs: 10
 
 model:

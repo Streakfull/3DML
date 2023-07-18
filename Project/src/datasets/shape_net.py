@@ -147,3 +147,10 @@ class ShapeNet(torch.utils.data.Dataset):
     def move_batch_to_device(batch, device):
         batch['images'] = batch['images'].float().to(device)
         batch['voxels'] =  batch['voxels'].float().to(device)
+   
+    @staticmethod
+    def move_batch_to_device_float(batch, device):
+        batch['images'] = batch['images'].float()
+        batch['voxels'] =  batch['voxels'].float()
+        
+    
