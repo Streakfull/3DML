@@ -89,7 +89,7 @@ class ShapeNet(torch.utils.data.Dataset):
             images = rearrange(images, 'h w c -> c h w')
             images = images[np.newaxis, :, :, :]
         else:
-            images = images[0:self.nimgs]
+#             images = images[0:self.nimgs]
             images = rearrange(images,'nimgs h w c -> nimgs c h w')
         return images
 
@@ -106,6 +106,7 @@ class ShapeNet(torch.utils.data.Dataset):
     def get_shape_rendering_images(self, shapenet_key):
         subset_images = np.random.choice(
             self.image_indices, size=self.rendering_nimages, replace=False)
+        subset_images = subset_images[0 : self.nimgs]
         images = None
         for i, image_number in enumerate(subset_images):
             image_key = f"0{image_number}" if image_number < 10 else image_number

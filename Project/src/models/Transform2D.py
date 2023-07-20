@@ -12,6 +12,8 @@ from blocks.transformer_decoder import TransformerDecoder
 from blocks.simple_decoder import SimpleDecoder
 from utils.util import iou
 from transformers import AutoImageProcessor, DeiTModel
+from blocks.view_fusion import ViewFusion
+from termcolor import colored, cprint
 
 
 class DiceLoss(nn.Module):
@@ -48,7 +50,7 @@ class CEDiceLoss(nn.Module):
         super(CEDiceLoss, self).__init__()
         self.smooth = smooth
         self.dice = DiceLoss()
-        self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction, pos_weight=torch.tensor(1.8))
+        self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction)
 
     def forward(self, output, target):
         ce_loss = self.cross_entropy(output, target)
@@ -59,11 +61,10 @@ class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
-        #self.patch_encoder = PatchEncoder(configs["encoder"])
-        #self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
         self.criterion = CEDiceLoss()
+        self.view_fusion = ViewFusion(configs["fusion_decoder"])
         self.optimizer = optim.Adam(params=self.parameters(), lr=1e-4)
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=25, gamma=0.5)
         self.sigmoid = torch.nn.Sigmoid()
@@ -97,7 +98,8 @@ class Transform2D(BaseModel):
         if(self.nimgs > 1):
              x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
              #x = rearrange(x, '(bs nimgs) p -> bs nimgs p', bs=self.bs,nimgs=self.nimgs)
-             x = x.mean(dim=1)
+             #x = x.mean(dim=1)
+             x = self.view_fusion(x)
         #import pdb;pdb.set_trace()
         x = self.transformer_decoder(x)
       
@@ -163,6 +165,11 @@ class Transform2D(BaseModel):
         self.eval()
         x = self.forward(x)
         self.backward()
+    
+    def load_ckpt(self, ckpt_path):
+        self.load_state_dict(torch.load(ckpt_path))
+        cprint(f"Model loaded from {ckpt_path}")
+        
         
         
 
