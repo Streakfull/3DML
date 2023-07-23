@@ -14,7 +14,6 @@ from torchvision.models import vgg16
 import torchvision.models as models
 
 from timm.models.vision_transformer import PatchEmbed
-from timm.models.vision_transformer_hybrid import HybridEmbed   
 
 class PatchEncoder(nn.Module):
     def __init__(self, configs):
@@ -28,27 +27,14 @@ class PatchEncoder(nn.Module):
       self.pos_embedding = nn.Embedding(self.N, self.embedding_dim)
       self.patch_embed = PatchEmbed(
                img_size=224, patch_size=16, in_chans=3, embed_dim=self.embedding_dim)
-      #self.dist_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
-      #self.cls_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
-      #trunc_normal_(self.dist_token, std=.02)
-      #trunc_normal_(self.cls_token, std=.02)
-      #self.model = vgg16(pretrained=True)
-      #self.model.eval()
-
+      
     def forward(self, x):
       x = self.patch_embed(x)
-      #import pdb;pdb.set_trace()
+
       self.bs = x.shape[0]
-      #self.set_input(images)
-#     embedded_patches = self.patch_embedding(self.patches)
       positions = torch.arange(self.N).to(x.device)
       pos_embedding = self.pos_embedding(positions)
-      #cls_tokens = self.cls_token.expand(self.bs, -1, -1)
-      #dist_token = self.dist_token.expand(self.bs, -1, -1)
-      #x = torch.cat((cls_tokens, dist_token, x), dim=1)  
-      #import pdb;pdb.set_trace()
       x = x + pos_embedding   
-      #import pdb;pdb.set_trace()
       return x
        
 

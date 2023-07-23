@@ -3,7 +3,7 @@ from torch import nn
 from blocks.residual_block import ResidualBlock
 
 class SimpleDecoder(nn.Module):
-     def __init__(self):
+     def __init__(self, configs):
               super().__init__()
               d_model = configs["d_model"]
               out_channels = configs["num_pos_embeddings"]
@@ -24,7 +24,7 @@ class SimpleDecoder(nn.Module):
             x = self.encoded_conv(x)
             x = self.conv_transpose(x)
             x = self.conv_transpose4(x)
-            return x;
+            return x
 
     
     

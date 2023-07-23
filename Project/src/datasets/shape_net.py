@@ -9,7 +9,7 @@ from utils.constants import (OVERFIT_DATASET_SIZE,
                              VOX_FOLDERNAME,
                              IMAGE_FOLDERNAME,
                              RENDERINGS_PER_SHAPE,
-                             IMAGE_RESOLUTION)
+                             )
 from utils.binvox_rw import read_as_3d_array
 from PIL import Image
 from einops import rearrange
@@ -35,7 +35,6 @@ image_trans = Compose([
         to_numpy,
         CenterCrop((224, 224), (128, 128)),
         RandomBackground(((240, 240), (240, 240), (240, 240))),
-        #ToTensor(),
         lambda x: x[0],
         normalize
     ])
