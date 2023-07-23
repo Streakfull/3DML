@@ -6,13 +6,14 @@ import torch
 from einops import rearrange,repeat
 import transformers
 from cprint import *
-
 # from timm.models.vision_transformer import (
-#         HybridEmbed,
-#         PatchEmbed)
+#     trunc_normal_,
+# )
+
+#from torchvision.models import vgg16
+#import torchvision.models as models
 
 from timm.models.vision_transformer import PatchEmbed
-from timm.models.vision_transformer_hybrid import HybridEmbed   
 
 class PatchEncoder(nn.Module):
     def __init__(self, configs):
@@ -24,20 +25,16 @@ class PatchEncoder(nn.Module):
       self.padding = configs["patch_padding"]
       self.in_features = self.patch_size * self.patch_size * self.channels
       self.pos_embedding = nn.Embedding(self.N, self.embedding_dim)
-      #self.patch_embedding = nn.Linear(in_features=self.in_features,out_features=self.embedding_dim)
       self.patch_embed = PatchEmbed(
-                img_size=137, patch_size=13, in_chans=4, embed_dim=768)
-
+               img_size=224, patch_size=16, in_chans=3, embed_dim=self.embedding_dim)
+      
     def forward(self, x):
       x = self.patch_embed(x)
-    
-      #self.set_input(images)
-#       embedded_patches = self.patch_embedding(self.patches)
+
+      self.bs = x.shape[0]
       positions = torch.arange(self.N).to(x.device)
       pos_embedding = self.pos_embedding(positions)
       x = x + pos_embedding   
-       #embedding = embedded_patches[:,self.random_indices,:] + pos_embedding[self.random_indices]
-      #import pdb;pdb.set_trace()
       return x
        
 

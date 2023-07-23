@@ -1,7 +1,8 @@
 from torch import nn
 import omegaconf
 import torch
-from einops import repeat
+from einops import repeat, rearrange
+import numpy as np
 
 
 class TransformerDecoder (nn.Module):
@@ -15,18 +16,38 @@ class TransformerDecoder (nn.Module):
             self.net = nn.TransformerDecoder(decoder_layer=decoder_layer, num_layers=num_layers)
             self.pos_embeddings = nn.Embedding(self.num_pos_embeddings, d_model)
             self.layer_norm = nn.LayerNorm(d_model)
-            
+            #self.rng = np.random.default_rng()
 
     def forward(self, x):
           self.bs = x.shape[0]
-          positions = torch.arange(self.num_pos_embeddings).to(x.device)
-          embeddings = self.pos_embeddings(positions)
-          embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)
+          #import pdb;pdb.set_trace()
+          #positions = torch.arange(self.num_pos_embeddings).to(x.device)
+          self.get_gen_order()
+          embeddings = self.pos_embeddings(self.gen_order.to(x.device))
+          #import pdb;pdb.set_trace()
+          #embeddings = rearrange(embeddings, 'bs sq d -> (bs sq) d')
+          #y = self.gen_order.flatten()
+          #sorted_output = torch.zeros_like(embeddings)
+          #sorted_output[y] = embeddings
+          #sorted_output = rearrange(embeddings, '(bs sq) d -> bs sq d', bs=self.bs, sq=self.num_pos_embeddings)
+          #embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)
+          #import pdb;pdb.set_trace()  
+          #embeddings = repeat(embeddings, 'n d -> repeat n d', repeat=self.bs)   
           x = self.net(embeddings, x)
           x = self.layer_norm(x)
             
           return x
-            
+    
+    def get_gen_order(self):
+        self.gen_order = np.arange(self.num_pos_embeddings)
+        self.gen_order = repeat(self.gen_order, 'd -> repeat d', repeat=self.bs)
+        #self.gen_order = self.rng.permuted(repeated, axis=1)
+        self.gen_order = torch.tensor(self.gen_order)
+       
+        
+        
+        
+        
             
             
         

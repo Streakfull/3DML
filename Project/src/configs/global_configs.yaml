@@ -1,22 +1,28 @@
 logs_dir: logs
 is_train: true
-name: trainingV15
+name: merge
 device: cuda:0
 batch_size: 8
 n_epochs: 100
-print_every: 20
-validate_every: 30
-save_every: 50
+append_loss_every: 50
+print_every: 150
+#print_every: 10
+validate_every: 4349
+save_every: 500
 save_every_nepochs: 10
+start_epoch: 0
+start_iteration: 0
+visualize_every: 1000
 
 model:
   lr: 0.0001
-  criterion: BCE #BCE | BCE_LOGITS | WEIGHTED_BCE_LOGITS
-  pos_weight: 1.3 # Only used if the loss value is WEIGHTED_BCE_LOGITS - weight of positive class
+  criterion: DICE_BCE #BCE | DICE | DICE_BCE
+  pos_weight: None # weight of positive class
+  fusion: TRANSFORMER #AVG | TRANSFORMER
 
   encoder:
-    patch_size: 13
-    sequence_length: 100
+    patch_size: 16
+    sequence_length: 196
     embedding_dim: 768
     patch_padding: 3
 
@@ -30,3 +36,8 @@ model:
     nhead: 12
     num_layers: 8
     num_pos_embeddings: 64
+
+  fusion_decoder:
+    d_model: 768
+    nhead: 6
+    num_layers: 2

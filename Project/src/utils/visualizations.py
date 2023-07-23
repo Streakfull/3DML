@@ -39,39 +39,40 @@ def visualize_image(image_array):
     
 sigm = Sigmoid()
 def save_voxels(pred, gt, save_path, iteration, is_train = True):
-     pred_plot = plot_voxels(sigm(pred.detach()), rot02=1,rot12=1)
+     pred_plots = plot_voxels(sigm(pred.detach()), rot02=1,rot12=1)
 
-     gt_plot = plot_voxels(gt.detach(), rot02=1,rot12=1)
+     gt_plots = plot_voxels(gt.detach(), rot02=1,rot12=1)
      title = "train"
      if(not is_train):
         title = "validation"
-     fig = visualize_png([gt_plot,pred_plot], f"{title}/Target-Reconstruction", rows=1)
+     fig = visualize_png(gt_plots + pred_plots, f"{title}/Target-Reconstruction", rows=2)
      final_save_path = f"{save_path}/{title}_{iteration}"
      fig.savefig(final_save_path)
      print(final_save_path, "saved")
      return fig
     
-def plot_voxels(voxels, rot01=0, rot02=0, rot12=0):
-    voxels = voxels[0]
+def plot_voxels(voxels_input, rot01=0, rot02=0, rot12=0, nimgs=3):
+    output = []
+    for i in range(nimgs):
+        voxels = voxels_input[i]
     #import pdb; pdb.set_trace()
-    voxels[voxels >= 0.5] = 1
-    voxels[voxels < 0.5] = 0
-    voxels = voxels.rot90(rot01, (0, 1))
-    voxels = voxels.rot90(rot02, (0, 2))
-    voxels = voxels.rot90(rot12, (1, 2))
-    ax = plt.figure().add_subplot(projection='3d')
-    ax.set_box_aspect((1, 1, 1))
-    ax.voxels(voxels)
+        voxels[voxels >= 0.5] = 1
+        voxels[voxels < 0.5] = 0
+        voxels = voxels.rot90(rot01, (0, 1))
+        voxels = voxels.rot90(rot02, (0, 2))
+        voxels = voxels.rot90(rot12, (1, 2))
+        ax = plt.figure().add_subplot(projection='3d')
+        ax.set_box_aspect((1, 1, 1))
+        ax.voxels(voxels)
+        buf = io.BytesIO()
+        plt.savefig(buf)
+        buf.seek(0)
+        img = Image.open(buf)
+        plt.clf()
+        plt.close()
+        output.append(img)
 
-    buf = io.BytesIO()
-    plt.savefig(buf)
-    buf.seek(0)
-    img = Image.open(buf)
-
-    plt.clf()
-    plt.close()
-
-    return img
+    return output
 
     
 
