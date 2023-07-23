@@ -22,7 +22,7 @@ class Transform2D(BaseModel):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
-        self.decoder = SimpleDecoder()
+        self.decoder = SimpleDecoder(configs["transformer_decoder"])
         self.criterion = BuildLoss(configs).get_loss()
         self.use_transformer_fusion = configs["fusion"] == "Transformer"
         if(configs["fusion"] == "Transformer"):
@@ -52,6 +52,7 @@ class Transform2D(BaseModel):
         if(self.nimgs > 1):
              x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
              if(self.use_transformer_fusion):
+                #print("view fusion")
                 x = self.view_fusion(x)
              else:
                 x = x.mean(dim=1)
