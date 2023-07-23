@@ -6,28 +6,29 @@ import torch
 from einops import rearrange,repeat
 import transformers
 from cprint import *
-from timm.models.vision_transformer import (
-    trunc_normal_,
-)
+# from timm.models.vision_transformer import (
+#     trunc_normal_,
+# )
 
-from torchvision.models import vgg16
-import torchvision.models as models
+#from torchvision.models import vgg16
+#import torchvision.models as models
 
-from timm.models.vision_transformer import PatchEmbed
-from timm.models.vision_transformer_hybrid import HybridEmbed   
+#from timm.models.vision_transformer import PatchEmbed
+#from timm.models.vision_transformer_hybrid import HybridEmbed   
 
 class PatchEncoder(nn.Module):
     def __init__(self, configs):
-      super().__init__()
-      self.channels = 4
-      self.patch_size = configs["patch_size"]
-      self.N = configs["sequence_length"]
-      self.embedding_dim = configs["embedding_dim"]
-      self.padding = configs["patch_padding"]
-      self.in_features = self.patch_size * self.patch_size * self.channels
-      self.pos_embedding = nn.Embedding(self.N, self.embedding_dim)
-      self.patch_embed = PatchEmbed(
-               img_size=224, patch_size=16, in_chans=3, embed_dim=self.embedding_dim)
+        print("HI")
+#       super().__init__()
+#       self.channels = 4
+#       self.patch_size = configs["patch_size"]
+#       self.N = configs["sequence_length"]
+#       self.embedding_dim = configs["embedding_dim"]
+#       self.padding = configs["patch_padding"]
+#       self.in_features = self.patch_size * self.patch_size * self.channels
+#       self.pos_embedding = nn.Embedding(self.N, self.embedding_dim)
+#       self.patch_embed = PatchEmbed(
+#                img_size=224, patch_size=16, in_chans=3, embed_dim=self.embedding_dim)
       #self.dist_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
       #self.cls_token = nn.Parameter(torch.zeros(1, 1, self.embedding_dim))
       #trunc_normal_(self.dist_token, std=.02)

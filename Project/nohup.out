@@ -1,0 +1,86 @@
+[I 03:59:19.781 NotebookApp] Serving notebooks from local directory: /cluster/51/streakfull51/3DML/Project
+[I 03:59:19.781 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 03:59:19.782 NotebookApp] http://TUINI15-VC51:8888/?token=5cd7051ba2d44a9b7883154dc9a0c3cf27e7cfb2901b47ef
+[I 03:59:19.782 NotebookApp]  or http://127.0.0.1:8888/?token=5cd7051ba2d44a9b7883154dc9a0c3cf27e7cfb2901b47ef
+[I 03:59:19.782 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 03:59:19.850 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///rhome/streakfull/.local/share/jupyter/runtime/nbserver-2080944-open.html
+    Or copy and paste one of these URLs:
+        http://TUINI15-VC51:8888/?token=5cd7051ba2d44a9b7883154dc9a0c3cf27e7cfb2901b47ef
+     or http://127.0.0.1:8888/?token=5cd7051ba2d44a9b7883154dc9a0c3cf27e7cfb2901b47ef
+[I 04:00:27.012 NotebookApp] 302 GET / (131.159.98.64) 1.070000ms
+[I 04:00:27.132 NotebookApp] 302 GET /tree? (131.159.98.64) 1.290000ms
+[I 04:00:43.157 NotebookApp] Interrupted...
+[I 04:00:43.160 NotebookApp] Shutting down 0 kernels
+[I 04:00:43.161 NotebookApp] Shutting down 0 terminals
+
+  _   _          _      _
+ | | | |_ __  __| |__ _| |_ ___
+ | |_| | '_ \/ _` / _` |  _/ -_)
+  \___/| .__/\__,_\__,_|\__\___|
+       |_|
+                       
+Read the migration plan to Notebook 7 to learn about the new features and the actions to take if you are using extensions.
+
+https://jupyter-notebook.readthedocs.io/en/latest/migrate_to_notebook7.html
+
+Please note that updating to Notebook 7 might break some of your extensions.
+
+[I 04:00:52.995 NotebookApp] Serving notebooks from local directory: /cluster/51/streakfull51/3DML/Project
+[I 04:00:52.995 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 04:00:52.995 NotebookApp] http://TUINI15-VC51:8888/?token=1f36677381a173eba8391e484b7fdd171d37cf0f78b4c2c9
+[I 04:00:52.995 NotebookApp]  or http://127.0.0.1:8888/?token=1f36677381a173eba8391e484b7fdd171d37cf0f78b4c2c9
+[I 04:00:52.995 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 04:00:53.041 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///rhome/streakfull/.local/share/jupyter/runtime/nbserver-2080955-open.html
+    Or copy and paste one of these URLs:
+        http://TUINI15-VC51:8888/?token=1f36677381a173eba8391e484b7fdd171d37cf0f78b4c2c9
+     or http://127.0.0.1:8888/?token=1f36677381a173eba8391e484b7fdd171d37cf0f78b4c2c9
+[I 04:00:53.740 NotebookApp] Interrupted...
+[I 04:00:53.741 NotebookApp] Shutting down 0 kernels
+[I 04:00:53.742 NotebookApp] Shutting down 0 terminals
+
+  _   _          _      _
+ | | | |_ __  __| |__ _| |_ ___
+ | |_| | '_ \/ _` / _` |  _/ -_)
+  \___/| .__/\__,_\__,_|\__\___|
+       |_|
+                       
+Read the migration plan to Notebook 7 to learn about the new features and the actions to take if you are using extensions.
+
+https://jupyter-notebook.readthedocs.io/en/latest/migrate_to_notebook7.html
+
+Please note that updating to Notebook 7 might break some of your extensions.
+
+[I 04:01:35.124 NotebookApp] Serving notebooks from local directory: /cluster/51/streakfull51/3DML/Project
+[I 04:01:35.124 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 04:01:35.124 NotebookApp] http://TUINI15-VC51:8888/?token=31a295c6f4307ffaac9f0bae87db56eed96ac440eae1a39d
+[I 04:01:35.124 NotebookApp]  or http://127.0.0.1:8888/?token=31a295c6f4307ffaac9f0bae87db56eed96ac440eae1a39d
+[I 04:01:35.124 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 04:01:35.127 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///rhome/streakfull/.local/share/jupyter/runtime/nbserver-2080973-open.html
+    Or copy and paste one of these URLs:
+        http://TUINI15-VC51:8888/?token=31a295c6f4307ffaac9f0bae87db56eed96ac440eae1a39d
+     or http://127.0.0.1:8888/?token=31a295c6f4307ffaac9f0bae87db56eed96ac440eae1a39d
+[I 04:04:00.013 NotebookApp] Interrupted...
+[I 04:04:00.015 NotebookApp] Shutting down 0 kernels
+[I 04:04:00.016 NotebookApp] Shutting down 0 terminals
+
+  _   _          _      _
+ | | | |_ __  __| |__ _| |_ ___
+ | |_| | '_ \/ _` / _` |  _/ -_)
+  \___/| .__/\__,_\__,_|\__\___|
+       |_|
+                       
+Read the migration plan to Notebook 7 to learn about the new features and the actions to take if you are using extensions.
+
+https://jupyter-notebook.readthedocs.io/en/latest/migrate_to_notebook7.html
+
+Please note that updating to Notebook 7 might break some of your extensions.
+
