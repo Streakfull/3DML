@@ -133,3 +133,65 @@
 [I 22:15:23.110 NotebookApp] Saving file at /train.ipynb
 [I 22:44:41.639 NotebookApp] Saving file at /train.ipynb
 [I 23:22:07.758 NotebookApp] Saving file at /train.ipynb
+[I 23:56:45.149 NotebookApp] Saving file at /train.ipynb
+[I 00:34:22.338 NotebookApp] Saving file at /train.ipynb
+[I 01:08:00.498 NotebookApp] Saving file at /train.ipynb
+[I 01:13:07.382 NotebookApp] 302 GET / (131.159.98.64) 0.230000ms
+[I 01:45:02.193 NotebookApp] Saving file at /train.ipynb
+[I 02:01:03.643 NotebookApp] Saving file at /train.ipynb
+[I 02:02:07.984 NotebookApp] Saving file at /train.ipynb
+[I 02:02:10.452 NotebookApp] Saving file at /train.ipynb
+[I 02:02:13.635 NotebookApp] Saving file at /train.ipynb
+[I 02:02:15.197 NotebookApp] Saving file at /train.ipynb
+[I 02:02:15.702 NotebookApp] Saving file at /train.ipynb
+[I 02:04:58.868 NotebookApp] Saving file at /train.ipynb
+[I 02:05:56.668 NotebookApp] Saving file at /train.ipynb
+[I 02:05:58.101 NotebookApp] Saving file at /train.ipynb
+[I 02:05:58.579 NotebookApp] Saving file at /train.ipynb
+[I 04:20:24.283 NotebookApp] Saving file at /train.ipynb
+[I 06:34:37.338 NotebookApp] Saving file at /train.ipynb
+[I 08:49:07.284 NotebookApp] Saving file at /train.ipynb
+[I 09:52:56.632 NotebookApp] Starting buffering for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 09:53:39.453 NotebookApp] Restoring connection for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 09:53:39.453 NotebookApp] Replaying 20 buffered messages
+[I 11:03:43.711 NotebookApp] Saving file at /train.ipynb
+[I 11:20:19.307 NotebookApp] Saving file at /train.ipynb
+[I 11:20:25.520 NotebookApp] Saving file at /train.ipynb
+[I 11:20:26.366 NotebookApp] Saving file at /train.ipynb
+[I 11:20:28.422 NotebookApp] Saving file at /train.ipynb
+[I 13:18:08.189 NotebookApp] Saving file at /train.ipynb
+[I 15:32:44.671 NotebookApp] Saving file at /train.ipynb
+[I 17:49:39.100 NotebookApp] Saving file at /train.ipynb
+[I 19:04:14.652 NotebookApp] Starting buffering for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 19:07:26.892 NotebookApp] Discarding 117 buffered messages for 740ce9e0-cca8-48b6-a936-8fc4d633b291:84cec89f27d14bd7a53698cf729c8eb3
+[I 19:07:26.970 NotebookApp] Starting buffering for 740ce9e0-cca8-48b6-a936-8fc4d633b291:530046f12a5742c183aaaabc0923729b
+[I 19:11:43.535 NotebookApp] Discarding 163 buffered messages for 740ce9e0-cca8-48b6-a936-8fc4d633b291:530046f12a5742c183aaaabc0923729b
+[I 19:12:26.138 NotebookApp] Starting buffering for 740ce9e0-cca8-48b6-a936-8fc4d633b291:b0163ddbb23348de9e1b1397de19dcdc
+[I 14:48:41.189 NotebookApp] 302 GET / (131.159.40.158) 0.520000ms
+[W 14:48:41.230 NotebookApp] Clearing invalid/expired login cookie username-localhost-3602
+[W 14:48:41.230 NotebookApp] Clearing invalid/expired login cookie username-localhost-3602
+[I 14:48:41.231 NotebookApp] 302 GET /tree? (131.159.40.158) 1.610000ms
+[W 14:49:01.341 NotebookApp] Not allowing login redirect to '/tree?'
+[I 14:49:01.341 NotebookApp] 302 GET /login?next=%2Ftree%3F (131.159.40.158) 0.490000ms
+[I 14:49:01.382 NotebookApp] 302 GET / (131.159.40.158) 0.180000ms
+[I 03:35:05.338 NotebookApp] 302 GET / (131.159.40.158) 0.500000ms
+[I 10:09:23.759 NotebookApp] 302 GET / (131.159.40.158) 0.480000ms
+[I 16:44:51.504 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 16:47:31.717 NotebookApp] Discarding 228105 buffered messages for 740ce9e0-cca8-48b6-a936-8fc4d633b291:b0163ddbb23348de9e1b1397de19dcdc
+[I 16:47:31.831 NotebookApp] Kernel shutdown: 740ce9e0-cca8-48b6-a936-8fc4d633b291
+[I 16:58:00.093 NotebookApp] Shutting down on /api/shutdown request.
+[I 16:58:00.097 NotebookApp] Shutting down 0 kernels
+[I 16:58:00.097 NotebookApp] Shutting down 0 terminals
+
+  _   _          _      _
+ | | | |_ __  __| |__ _| |_ ___
+ | |_| | '_ \/ _` / _` |  _/ -_)
+  \___/| .__/\__,_\__,_|\__\___|
+       |_|
+                       
+Read the migration plan to Notebook 7 to learn about the new features and the actions to take if you are using extensions.
+
+https://jupyter-notebook.readthedocs.io/en/latest/migrate_to_notebook7.html
+
+Please note that updating to Notebook 7 might break some of your extensions.
+
