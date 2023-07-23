@@ -11,6 +11,8 @@ from blocks.transformer_decoder import TransformerDecoder
 from blocks.simple_decoder import SimpleDecoder
 from utils.util import iou
 from transformers import  DeiTModel
+from blocks.view_fusion import ViewFusion
+from termcolor import colored, cprint
 
 
 
@@ -19,11 +21,12 @@ class Transform2D(BaseModel):
     def __init__(self, configs_path="./configs/global_configs.yaml"):
         super().__init__()
         configs = omegaconf.OmegaConf.load(configs_path)["model"]
-        #self.patch_encoder = PatchEncoder(configs["encoder"])
-        #self.transformer_encoder = TransformerEncoder(configs["transformer_encoder"])
         self.transformer_decoder = TransformerDecoder(configs["transformer_decoder"])
         self.decoder = SimpleDecoder()
         self.criterion = BuildLoss(configs).get_loss()
+        self.use_transformer_fusion = configs["fusion"] == "Transformer"
+        if(configs["fusion"] == "Transformer"):
+            self.view_fusion = ViewFusion(configs["fusion_decoder"])
         self.optimizer = optim.Adam(params=self.parameters(), lr=1e-4)
         self.scheduler = optim.lr_scheduler.StepLR(self.optimizer, step_size=25, gamma=0.5)
         self.sigmoid = torch.nn.Sigmoid()
@@ -48,7 +51,12 @@ class Transform2D(BaseModel):
         ## Fusion
         if(self.nimgs > 1):
              x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
-             x = x.mean(dim=1)
+             if(self.use_transformer_fusion):
+                x = self.view_fusion(x)
+             else:
+                x = x.mean(dim=1)
+
+
         x = self.transformer_decoder(x)
         ## Occupancy Grid
         x = rearrange(x,'bs (c1 c2 c3) d -> bs d c1 c2 c3', c1=4,c2=4,c3=4)
@@ -87,6 +95,11 @@ class Transform2D(BaseModel):
         self.eval()
         x = self.forward(x)
         self.backward()
+    
+    def load_ckpt(self, ckpt_path):
+        self.load_state_dict(torch.load(ckpt_path))
+        cprint(f"Model loaded from {ckpt_path}")
+        
         
         
 

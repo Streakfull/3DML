@@ -6,12 +6,12 @@ import torch
 from einops import rearrange,repeat
 import transformers
 from cprint import *
-from timm.models.vision_transformer import (
-    trunc_normal_,
-)
+# from timm.models.vision_transformer import (
+#     trunc_normal_,
+# )
 
-from torchvision.models import vgg16
-import torchvision.models as models
+#from torchvision.models import vgg16
+#import torchvision.models as models
 
 from timm.models.vision_transformer import PatchEmbed
 

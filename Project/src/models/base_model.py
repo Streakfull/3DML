@@ -62,10 +62,13 @@ class BaseModel(torch.nn.Module):
     def update_lr(self):
         pass
 
+    def load_ckpt(self):
+       pass
 
     def tocuda(self, var_names):
         for name in var_names:
             if isinstance(name, str):
                 var = getattr(self, name)
                 setattr(self, name, var.cuda(0, non_blocking=True))
+                
 
