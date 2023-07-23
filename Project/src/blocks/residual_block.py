@@ -3,7 +3,7 @@ from torch import nn
 class ResidualBlock(nn.Module):
     def __init__(self, input_channels, kernel_size = 3, padding = 1):
         super().__init__()
-        self.block = nn.Sequential(
+        self.net = nn.Sequential(
             nn.Conv3d(input_channels, input_channels, kernel_size, padding=padding),
             nn.ReLU(),
             nn.Conv3d(input_channels, input_channels, kernel_size, padding=padding),
@@ -12,4 +12,4 @@ class ResidualBlock(nn.Module):
         )
 
     def forward(self, x):
-        return self.block(x) + x
+        return self.net(x) + x

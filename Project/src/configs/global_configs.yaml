@@ -1,6 +1,6 @@
-logs_dir: logs
+logs_dir: logs/final_models/evaluations
 is_train: true
-name: merge
+name: evaluation_dev
 device: cuda:0
 batch_size: 8
 n_epochs: 100
@@ -17,8 +17,8 @@ visualize_every: 1000
 model:
   lr: 0.0001
   criterion: DICE_BCE #BCE | DICE | DICE_BCE
-  pos_weight: None # weight of positive class
-  fusion: TRANSFORMER #AVG | TRANSFORMER
+  pos_weight: 1.8 # weight of positive class
+  fusion: AVG #AVG | TRANSFORMER
 
   encoder:
     patch_size: 16
@@ -41,3 +41,7 @@ model:
     d_model: 768
     nhead: 6
     num_layers: 2
+    
+    
+evaluation:
+  ckpt_path: logs/final_models/avg_fusion/checkpoints/epoch-latest.ckpt

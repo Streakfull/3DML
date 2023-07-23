@@ -50,6 +50,7 @@ class ShapeNet(torch.utils.data.Dataset):
     category_directory_mapping = json.loads(
         Path("datasets/shape_class_info.json").read_text())
     classes = sorted(class_name_mapping.keys())
+    class_names = sorted(class_name_mapping.values())
 
     def __init__(self, cat="all", is_overfit=True, dataset_path=DATASET_PATH,
                  vox_foldername=VOX_FOLDERNAME, image_foldername=IMAGE_FOLDERNAME, nimgs=1):
@@ -76,10 +77,16 @@ class ShapeNet(torch.utils.data.Dataset):
         voxels = self.get_shape_voxels(shape_key)
         images = self.get_shape_rendering_images(shape_key)
         images = self.transform_images(images)
-        #import pdb;pdb.set_trace()
+        raw_images = self.get_raw_images(shape_key)
+        shape_info = shape_key.split("/")
+        class_name = ShapeNet.class_name_mapping[shape_info[0]]
+        
         return {
             "voxels": voxels[np.newaxis, :, :, :],
-            "images": images
+            "images": images,
+            "class": class_name,
+            "raw_image": raw_images,
+            "id": shape_info[1]
         }
     
     def transform_images(self, images):
@@ -120,6 +127,16 @@ class ShapeNet(torch.utils.data.Dataset):
             images = image_array if images is None else np.vstack(
                 (images, image_array))
         return images
+    
+    def get_raw_images(self, shapenet_key):
+         subset_images = np.random.choice(
+            self.image_indices, size=1, replace=False)
+         image_number = subset_images[0]
+         image_key = f"0{image_number}" if image_number < 10 else image_number
+         path = self.dataset_path / self.image_foldername / shapenet_key / "rendering" / f"{image_key}.png"
+         rgba = Image.open(path)
+         rgba = np.array(rgba) / 255
+         return rgba
 
     def get_category_shape_ids(self, category_id):
         ids = os.listdir(
@@ -147,10 +164,13 @@ class ShapeNet(torch.utils.data.Dataset):
     def move_batch_to_device(batch, device):
         batch['images'] = batch['images'].float().to(device)
         batch['voxels'] =  batch['voxels'].float().to(device)
+        batch["raw_image"] = batch["raw_image"].float().to(device)
+       
    
     @staticmethod
     def move_batch_to_device_float(batch, device):
         batch['images'] = batch['images'].float()
         batch['voxels'] =  batch['voxels'].float()
+        batch["raw_image"] = batch["raw_image"].float()
         
     
