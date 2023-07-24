@@ -49,6 +49,7 @@ class Transform2D(BaseModel):
         ## Encode
         x = self.deit_model(self.images).last_hidden_state
         ## Fusion
+      
         if(self.nimgs > 1):
              x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
              if(self.use_transformer_fusion):

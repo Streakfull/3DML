@@ -126,6 +126,7 @@ class ShapeNet(torch.utils.data.Dataset):
             #image_array = image_array / 255
             images = image_array if images is None else np.vstack(
                 (images, image_array))
+
         return images
     
     def get_raw_images(self, shapenet_key):
