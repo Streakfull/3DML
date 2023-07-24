@@ -62,9 +62,14 @@ def plot_voxels(voxels_input, rot01=0, rot02=0, rot12=0, nimgs=3):
         voxels = voxels.rot90(rot02, (0, 2))
         voxels = voxels.rot90(rot12, (1, 2))
         ax = plt.figure().add_subplot(projection='3d')
-        ax.set_box_aspect((1, 1, 1))
+        ax.set_box_aspect((2, 2, 2))
         ax.voxels(voxels)
         buf = io.BytesIO()
+        ax.grid(False)
+        ax.axison = False
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_zticks([])
         plt.savefig(buf)
         buf.seek(0)
         img = Image.open(buf)
@@ -105,6 +110,29 @@ def visualize_png(images, title, rows=5):
     for i, img in enumerate(images):
         fig.add_subplot(rows, columns, i+1)
         plt.imshow(img)
+    
+#     for ax in fig.axes:
+#         ax.axison = False
+    #plt.show()
+    plt.show()
+    return fig
+
+def visualize_png2(images, title, rows=5):
+    nimages = len(images)
+    columns = nimages//rows
+    if (nimages % rows != 0):
+        rows += 1
+    if(columns == 0):
+        columns = 1
+   
+    fig = plt.figure(figsize=(10,8))
+    fig.suptitle(title, fontsize=20)
+    for i, img in enumerate(images):
+        fig.add_subplot(rows, columns, i+1)
+        plt.imshow(img)
+    
+#     for ax in fig.axes:
+#         ax.axison = False
     #plt.show()
     plt.show()
     return fig
