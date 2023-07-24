@@ -9,11 +9,11 @@ class DiceLossBCE(nn.Module):
         self.smooth = smooth
         self.dice = DiceLoss()
         if(pos_weight != None):
-            self.bce = nn.BCEWithLogitsLoss(reduction=reduction, pos_weight=torch.tensor(pos_weight))
+            self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction, pos_weight=torch.tensor(pos_weight))
         else:
-            self.bce = nn.BCEWithLogitsLoss(reduction=reduction)
+            self.cross_entropy = nn.BCEWithLogitsLoss(reduction=reduction)
 
     def forward(self, output, target):
-        bce = self.bce(output, target)
+        bce = self.cross_entropy(output, target)
         dice = self.dice(output, target)
         return bce + dice

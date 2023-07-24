@@ -49,6 +49,7 @@ class Transform2D(BaseModel):
         ## Encode
         x = self.deit_model(self.images).last_hidden_state
         ## Fusion
+      
         if(self.nimgs > 1):
              x = rearrange(x, '(bs nimgs) s p -> bs nimgs s p', bs=self.bs,nimgs=self.nimgs)
              if(self.use_transformer_fusion):
@@ -79,17 +80,19 @@ class Transform2D(BaseModel):
         self.optimizer.step()
         
     
-    def get_metrics(self):
-        iou_val = self.get_iou()
+    def get_metrics(self, no_reduction=False, iou_threshold=0.5):
+        iou_val = self.get_iou(no_reduction, iou_threshold)
         return  OrderedDict([
             ('loss', self.loss.data),
             ('iou', iou_val),
            
         ])
     
-    def get_iou(self):
+    def get_iou(self, no_reduction=False, threshold=0.5):
         gt =  target = self.voxels.squeeze(1)
-        iou_val = iou(gt, self.x, 0.5)
+        iou_val = iou(gt, self.x, threshold)
+        if(no_reduction):
+            return iou_val
         return iou_val.mean()
     
     def inference(self, x):
