@@ -24,6 +24,15 @@ This repo contains all related work for the Machine Learning for 3D Geometry Cou
 - From your local machine: `ssh -NL 3000:TUINI15-<connected_node>.vc.in.tum.de:8888 <user>@ml3d.vc.in.tum.de`
 - Run the `initial_setup.ipynb` notebook to obtain the dataset
 
+## Checkpoints and results
+* [You can find all checkpoints and experiments, results, tensorboard and tarining visualizations](https://drive.google.com/drive/folders/1zppUpldYmmwKAwD0guCpYVZuU1NZEck-?usp=sharing)
+
+## Training
+To train the model run the `train.ipynb` notebook after adjusting the global configs
+
+## Evaluation
+To evaluate the model on the test set run the `evaluation.ipynb` notebook after 
+
 # General Links
 
 ##### This section contains any useful links found
