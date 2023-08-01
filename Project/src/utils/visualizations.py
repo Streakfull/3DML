@@ -46,7 +46,8 @@ def save_voxels(pred, gt, save_path, iteration, is_train = True):
      if(not is_train):
         title = "validation"
      fig = visualize_png(gt_plots + pred_plots, f"{title}/Target-Reconstruction", rows=2)
-     final_save_path = f"{save_path}/{title}_{iteration}"
+     final_save_path = f"{save_path}/{title}_{int(iteration)}"
+     print(final_save_path, "saved")
      fig.savefig(final_save_path)
      print(final_save_path, "saved")
      return fig

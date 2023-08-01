@@ -1,0 +1,395 @@
+[W 18:40:27.797 NotebookApp] Error loading server extension jupyter_lsp
+    Traceback (most recent call last):
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/notebookapp.py", line 2050, in init_server_extensions
+        func(self)
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyter_lsp/serverextension.py", line 76, in load_jupyter_server_extension
+        nbapp.io_loop.call_later(0, initialize, nbapp, virtual_documents_uri)
+    AttributeError: 'NotebookApp' object has no attribute 'io_loop'
+[I 18:40:27.820 NotebookApp] JupyterLab extension loaded from /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyterlab
+[I 18:40:27.820 NotebookApp] JupyterLab application directory is /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/share/jupyter/lab
+[I 18:40:27.825 NotebookApp] Serving notebooks from local directory: /mnt/hdd/streakfull/3DML/Project/src
+[I 18:40:27.825 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 18:40:27.825 NotebookApp] http://PC04:8888/?token=4a76283a9d54fd3a17e93bf1f3d5d2ef557875c1d028a24f
+[I 18:40:27.825 NotebookApp]  or http://127.0.0.1:8888/?token=4a76283a9d54fd3a17e93bf1f3d5d2ef557875c1d028a24f
+[I 18:40:27.825 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 18:40:27.827 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/youssef/.local/share/jupyter/runtime/nbserver-104945-open.html
+    Or copy and paste one of these URLs:
+        http://PC04:8888/?token=4a76283a9d54fd3a17e93bf1f3d5d2ef557875c1d028a24f
+     or http://127.0.0.1:8888/?token=4a76283a9d54fd3a17e93bf1f3d5d2ef557875c1d028a24f
+[I 18:40:37.925 NotebookApp] 302 GET / (131.159.40.158) 1.180000ms
+[W 18:40:37.987 NotebookApp] Clearing invalid/expired login cookie username-localhost-3600
+[W 18:40:37.988 NotebookApp] Clearing invalid/expired login cookie username-localhost-3600
+[I 18:40:37.989 NotebookApp] 302 GET /tree? (131.159.40.158) 3.260000ms
+[I 18:40:56.656 NotebookApp] 302 GET / (131.159.40.158) 1.020000ms
+[I 18:40:56.694 NotebookApp] 302 GET /tree? (131.159.40.158) 1.440000ms
+[I 18:41:06.129 NotebookApp] Interrupted...
+[I 18:41:06.130 NotebookApp] Shutting down 0 kernels
+[I 18:41:06.131 NotebookApp] Shutting down 0 terminals
+
+  _   _          _      _
+ | | | |_ __  __| |__ _| |_ ___
+ | |_| | '_ \/ _` / _` |  _/ -_)
+  \___/| .__/\__,_\__,_|\__\___|
+       |_|
+                       
+Read the migration plan to Notebook 7 to learn about the new features and the actions to take if you are using extensions.
+
+https://jupyter-notebook.readthedocs.io/en/latest/migrate_to_notebook7.html
+
+Please note that updating to Notebook 7 might break some of your extensions.
+
+[W 18:42:05.531 NotebookApp] Error loading server extension jupyter_lsp
+    Traceback (most recent call last):
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/notebookapp.py", line 2050, in init_server_extensions
+        func(self)
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyter_lsp/serverextension.py", line 76, in load_jupyter_server_extension
+        nbapp.io_loop.call_later(0, initialize, nbapp, virtual_documents_uri)
+    AttributeError: 'NotebookApp' object has no attribute 'io_loop'
+[I 18:42:05.548 NotebookApp] JupyterLab extension loaded from /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/jupyterlab
+[I 18:42:05.548 NotebookApp] JupyterLab application directory is /home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/share/jupyter/lab
+[I 18:42:05.552 NotebookApp] Serving notebooks from local directory: /mnt/hdd/streakfull/3DML/Project/src
+[I 18:42:05.552 NotebookApp] Jupyter Notebook 6.5.4 is running at:
+[I 18:42:05.552 NotebookApp] http://PC04:8888/?token=41bd63486d340c3e358c4e778e27f894c20a7c8943e1d949
+[I 18:42:05.552 NotebookApp]  or http://127.0.0.1:8888/?token=41bd63486d340c3e358c4e778e27f894c20a7c8943e1d949
+[I 18:42:05.552 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 18:42:05.554 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/youssef/.local/share/jupyter/runtime/nbserver-105067-open.html
+    Or copy and paste one of these URLs:
+        http://PC04:8888/?token=41bd63486d340c3e358c4e778e27f894c20a7c8943e1d949
+     or http://127.0.0.1:8888/?token=41bd63486d340c3e358c4e778e27f894c20a7c8943e1d949
+[I 18:42:40.563 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:47:03.122 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:48:09.937 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:48:12.798 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:48:54.872 NotebookApp] Kernel started: f3e14203-ec19-4fce-abfd-b1a622296287, name: python3
+[IPKernelApp] ERROR | No such comm target registered: jupyter.widget.control
+[IPKernelApp] WARNING | No such comm: 694fd5be-3739-40de-b34e-a9dbb7ded8ec
+[I 18:51:56.045 NotebookApp] Saving file at /train.ipynb
+[I 18:52:02.780 NotebookApp] Saving file at /train.ipynb
+[I 18:52:47.867 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:54:05.802 NotebookApp] Saving file at /train.ipynb
+[I 18:55:27.948 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 18:56:17.709 NotebookApp] Kernel started: 387bac3d-4438-4fb3-bf6d-12fabbd35e1f, name: python3
+[IPKernelApp] ERROR | No such comm target registered: jupyter.widget.control
+[IPKernelApp] WARNING | No such comm: 151d1bac-d7e2-406c-bc0d-2dd6cc766d12
+[I 18:56:36.857 NotebookApp] Starting buffering for 387bac3d-4438-4fb3-bf6d-12fabbd35e1f:518cfeb90b954070935b2198812114ca
+[I 18:56:36.865 NotebookApp] Kernel shutdown: 387bac3d-4438-4fb3-bf6d-12fabbd35e1f
+[I 18:57:17.044 NotebookApp] Kernel interrupted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 18:58:18.707 NotebookApp] Saving file at /Evaluation.py.ipynb
+[I 19:04:00.298 NotebookApp] Saving file at /train.ipynb
+[W 19:09:55.248 NotebookApp] WebSocket ping timeout after 119860 ms.
+[W 19:09:55.888 NotebookApp] zmq message arrived on closed channel
+[W 19:09:56.898 NotebookApp] zmq message arrived on closed channel
+[W 19:09:58.700 NotebookApp] zmq message arrived on closed channel
+[W 19:09:59.465 NotebookApp] zmq message arrived on closed channel
+[I 19:10:00.251 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:be9da5dcbc4042948b0ffba0fc879562
+[I 19:10:18.223 NotebookApp] Discarding 21 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:be9da5dcbc4042948b0ffba0fc879562
+[I 19:11:49.874 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:b33abe95ebab424e90d87b80a214df92
+[I 19:11:51.786 NotebookApp] Discarding 2 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:b33abe95ebab424e90d87b80a214df92
+[I 19:13:54.409 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:18fdee1bfae2400a9415190e79190d90
+[I 19:13:59.844 NotebookApp] Discarding 6 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:18fdee1bfae2400a9415190e79190d90
+[I 19:14:01.476 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:14:02.623 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:14:02.883 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:14:03.062 NotebookApp] Replaying 48 buffered messages
+[I 19:15:59.875 NotebookApp] Saving file at /train.ipynb
+[I 19:21:34.428 NotebookApp] Kernel interrupted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:21:41.472 NotebookApp] Saving file at /train.ipynb
+[I 19:22:00.001 NotebookApp] Saving file at /train.ipynb
+[I 19:23:59.825 NotebookApp] Saving file at /train.ipynb
+[I 19:31:29.765 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:31:35.776 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:32:00.059 NotebookApp] Saving file at /train.ipynb
+[I 19:32:27.926 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:32:31.370 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:32:31.507 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:32:31.507 NotebookApp] Replaying 1 buffered messages
+[I 19:33:06.973 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:33:11.560 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:33:12.598 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:33:12.874 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:33:13.008 NotebookApp] Replaying 3 buffered messages
+[I 19:33:48.912 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:33:49.649 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:33:49.739 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:33:50.249 NotebookApp] Replaying 3 buffered messages
+[I 19:33:52.244 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:33:59.880 NotebookApp] Saving file at /train.ipynb
+[I 19:34:57.680 NotebookApp] Saving file at /train.ipynb
+[I 19:35:11.579 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:35:12.511 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:35:12.634 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:35:12.957 NotebookApp] Replaying 3 buffered messages
+[I 19:35:49.416 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:35:50.458 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:35:50.562 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:35:50.941 NotebookApp] Replaying 10 buffered messages
+[I 19:35:59.837 NotebookApp] Saving file at /train.ipynb
+[I 19:36:28.385 NotebookApp] Saving file at /train.ipynb
+[I 19:36:35.616 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:36:45.779 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:36:46.116 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:36:46.223 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:36:46.627 NotebookApp] Replaying 3 buffered messages
+[I 19:37:35.731 NotebookApp] Kernel interrupted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:37:43.776 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:37:47.069 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:37:50.009 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:37:50.117 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 19:37:50.117 NotebookApp] Replaying 1 buffered messages
+[I 19:37:59.869 NotebookApp] Saving file at /train.ipynb
+[I 19:39:59.871 NotebookApp] Saving file at /train.ipynb
+[I 19:47:59.959 NotebookApp] Saving file at /train.ipynb
+[I 19:49:59.972 NotebookApp] Saving file at /train.ipynb
+[I 19:51:59.944 NotebookApp] Saving file at /train.ipynb
+[I 19:54:00.328 NotebookApp] Saving file at /train.ipynb
+[I 19:55:59.933 NotebookApp] Saving file at /train.ipynb
+[I 19:57:59.984 NotebookApp] Saving file at /train.ipynb
+[I 20:00:00.018 NotebookApp] Saving file at /train.ipynb
+[I 20:02:00.057 NotebookApp] Saving file at /train.ipynb
+[I 20:04:00.009 NotebookApp] Saving file at /train.ipynb
+[I 20:04:42.896 NotebookApp] Saving file at /train.ipynb
+[I 20:04:45.970 NotebookApp] Saving file at /train.ipynb
+[I 20:08:11.917 NotebookApp] Saving file at /train.ipynb
+[I 20:10:23.807 NotebookApp] Saving file at /train.ipynb
+[I 20:11:13.449 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 20:13:08.793 NotebookApp] Saving file at /train.ipynb
+[I 20:13:20.808 NotebookApp] Saving file at /train.ipynb
+[I 20:13:38.482 NotebookApp] Saving file at /utils/visualizations.py
+[I 20:14:42.852 NotebookApp] Saving file at /train.ipynb
+[I 20:16:21.617 NotebookApp] Saving file at /utils/visualizations.py
+[I 20:16:52.827 NotebookApp] Saving file at /train.ipynb
+[I 20:19:03.352 NotebookApp] Saving file at /train.ipynb
+[I 20:20:45.634 NotebookApp] Saving file at /utils/visualizations.py
+[I 20:21:12.819 NotebookApp] Saving file at /train.ipynb
+[I 20:22:17.421 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 20:22:18.757 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 20:22:18.842 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 20:22:19.266 NotebookApp] Replaying 12 buffered messages
+[I 20:22:21.225 NotebookApp] Saving file at /train.ipynb
+[I 20:23:22.844 NotebookApp] Saving file at /train.ipynb
+[I 20:29:10.172 NotebookApp] Kernel interrupted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 20:29:16.732 NotebookApp] Saving file at /train.ipynb
+[I 20:29:19.680 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 20:29:22.616 NotebookApp] Kernel restarted: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 20:29:22.724 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 20:29:22.724 NotebookApp] Replaying 1 buffered messages
+[I 20:29:52.904 NotebookApp] Saving file at /train.ipynb
+[I 20:38:33.004 NotebookApp] Saving file at /train.ipynb
+[I 20:40:42.921 NotebookApp] Saving file at /train.ipynb
+[I 20:42:53.077 NotebookApp] Saving file at /train.ipynb
+[I 20:49:23.221 NotebookApp] Saving file at /train.ipynb
+[I 20:51:33.296 NotebookApp] Saving file at /train.ipynb
+[I 20:53:43.276 NotebookApp] Saving file at /train.ipynb
+[I 20:55:56.115 NotebookApp] Saving file at /train.ipynb
+[I 20:58:06.779 NotebookApp] Saving file at /train.ipynb
+[I 21:00:17.162 NotebookApp] Saving file at /train.ipynb
+[I 21:02:25.957 NotebookApp] Saving file at /train.ipynb
+[I 21:04:35.375 NotebookApp] Saving file at /train.ipynb
+[I 21:06:45.953 NotebookApp] Saving file at /train.ipynb
+[I 21:08:53.309 NotebookApp] Saving file at /train.ipynb
+[I 21:11:03.289 NotebookApp] Saving file at /train.ipynb
+[I 21:13:13.698 NotebookApp] Saving file at /train.ipynb
+[I 21:15:23.607 NotebookApp] Saving file at /train.ipynb
+[I 21:17:40.946 NotebookApp] Saving file at /train.ipynb
+[I 21:19:43.301 NotebookApp] Saving file at /train.ipynb
+[I 21:21:53.464 NotebookApp] Saving file at /train.ipynb
+[I 21:24:03.459 NotebookApp] Saving file at /train.ipynb
+[I 21:26:14.575 NotebookApp] Saving file at /train.ipynb
+[I 21:28:23.805 NotebookApp] Saving file at /train.ipynb
+[I 21:30:36.476 NotebookApp] Saving file at /train.ipynb
+[I 21:32:44.087 NotebookApp] Saving file at /train.ipynb
+[I 21:34:53.641 NotebookApp] Saving file at /train.ipynb
+[I 21:37:14.045 NotebookApp] Saving file at /train.ipynb
+[I 21:39:39.872 NotebookApp] Saving file at /train.ipynb
+[I 21:42:00.101 NotebookApp] Saving file at /train.ipynb
+[I 21:44:19.337 NotebookApp] Saving file at /train.ipynb
+[I 21:46:42.406 NotebookApp] Saving file at /train.ipynb
+[I 21:48:59.412 NotebookApp] Saving file at /train.ipynb
+[I 21:51:20.366 NotebookApp] Saving file at /train.ipynb
+[I 21:53:39.703 NotebookApp] Saving file at /train.ipynb
+[I 21:55:58.014 NotebookApp] Saving file at /train.ipynb
+[I 21:58:18.418 NotebookApp] Saving file at /train.ipynb
+[I 22:00:38.315 NotebookApp] Saving file at /train.ipynb
+[I 22:02:57.234 NotebookApp] Saving file at /train.ipynb
+[I 22:05:17.219 NotebookApp] Saving file at /train.ipynb
+[I 22:07:37.720 NotebookApp] Saving file at /train.ipynb
+[I 22:09:59.242 NotebookApp] Saving file at /train.ipynb
+[I 22:12:22.096 NotebookApp] Saving file at /train.ipynb
+[I 22:14:41.942 NotebookApp] Saving file at /train.ipynb
+[I 22:16:57.611 NotebookApp] Saving file at /train.ipynb
+[I 22:19:18.520 NotebookApp] Saving file at /train.ipynb
+[I 22:21:37.445 NotebookApp] Saving file at /train.ipynb
+[I 22:23:58.519 NotebookApp] Saving file at /train.ipynb
+[I 22:26:17.522 NotebookApp] Saving file at /train.ipynb
+[I 22:28:37.824 NotebookApp] Saving file at /train.ipynb
+[I 22:30:57.786 NotebookApp] Saving file at /train.ipynb
+[I 22:33:23.838 NotebookApp] Saving file at /train.ipynb
+[I 22:35:38.162 NotebookApp] Saving file at /train.ipynb
+[I 22:37:58.320 NotebookApp] Saving file at /train.ipynb
+[I 22:40:17.114 NotebookApp] Saving file at /train.ipynb
+[I 22:42:37.967 NotebookApp] Saving file at /train.ipynb
+[I 22:45:00.079 NotebookApp] Saving file at /train.ipynb
+[I 22:47:20.510 NotebookApp] Saving file at /train.ipynb
+[I 22:49:38.919 NotebookApp] Saving file at /train.ipynb
+[I 22:51:59.979 NotebookApp] Saving file at /train.ipynb
+[I 22:54:19.091 NotebookApp] Saving file at /train.ipynb
+[I 22:56:42.335 NotebookApp] Saving file at /train.ipynb
+[I 22:59:03.292 NotebookApp] Saving file at /train.ipynb
+[I 23:01:19.697 NotebookApp] Saving file at /train.ipynb
+[I 23:03:40.630 NotebookApp] Saving file at /train.ipynb
+[I 23:06:00.001 NotebookApp] Saving file at /train.ipynb
+[I 23:13:00.694 NotebookApp] Saving file at /train.ipynb
+[I 23:15:19.898 NotebookApp] Saving file at /train.ipynb
+[I 23:17:40.400 NotebookApp] Saving file at /train.ipynb
+[I 23:20:02.048 NotebookApp] Saving file at /train.ipynb
+[I 23:22:22.236 NotebookApp] Saving file at /train.ipynb
+[I 23:24:43.097 NotebookApp] Saving file at /train.ipynb
+[I 23:26:58.817 NotebookApp] Saving file at /train.ipynb
+[I 23:29:20.556 NotebookApp] Saving file at /train.ipynb
+[I 23:31:39.376 NotebookApp] Saving file at /train.ipynb
+[I 23:33:59.263 NotebookApp] Saving file at /train.ipynb
+[I 23:36:26.764 NotebookApp] Saving file at /train.ipynb
+[I 23:38:41.769 NotebookApp] Saving file at /train.ipynb
+[I 23:40:59.200 NotebookApp] Saving file at /train.ipynb
+[I 23:43:19.554 NotebookApp] Saving file at /train.ipynb
+[I 23:45:40.010 NotebookApp] Saving file at /train.ipynb
+[I 23:47:58.964 NotebookApp] Saving file at /train.ipynb
+[I 23:50:19.763 NotebookApp] Saving file at /train.ipynb
+[I 23:52:41.945 NotebookApp] Saving file at /train.ipynb
+[I 23:54:59.108 NotebookApp] Saving file at /train.ipynb
+[I 23:57:19.445 NotebookApp] Saving file at /train.ipynb
+[I 23:59:42.664 NotebookApp] Saving file at /train.ipynb
+[I 00:02:00.141 NotebookApp] Saving file at /train.ipynb
+[I 00:04:22.363 NotebookApp] Saving file at /train.ipynb
+[I 00:06:42.675 NotebookApp] Saving file at /train.ipynb
+[I 00:09:01.502 NotebookApp] Saving file at /train.ipynb
+[I 00:11:20.588 NotebookApp] Saving file at /train.ipynb
+[I 00:13:39.699 NotebookApp] Saving file at /train.ipynb
+[I 00:16:02.186 NotebookApp] Saving file at /train.ipynb
+[I 00:18:21.657 NotebookApp] Saving file at /train.ipynb
+[I 00:20:40.896 NotebookApp] Saving file at /train.ipynb
+[I 00:23:02.272 NotebookApp] Saving file at /train.ipynb
+[I 00:25:24.473 NotebookApp] Saving file at /train.ipynb
+[I 00:27:42.930 NotebookApp] Saving file at /train.ipynb
+[I 00:30:01.768 NotebookApp] Saving file at /train.ipynb
+[I 00:32:49.789 NotebookApp] Saving file at /train.ipynb
+[I 00:38:15.250 NotebookApp] Saving file at /train.ipynb
+[I 00:43:31.949 NotebookApp] Saving file at /train.ipynb
+[I 00:48:51.965 NotebookApp] Saving file at /train.ipynb
+[I 00:54:18.332 NotebookApp] Saving file at /train.ipynb
+[I 00:59:35.378 NotebookApp] Saving file at /train.ipynb
+[I 01:04:52.276 NotebookApp] Saving file at /train.ipynb
+[I 01:10:12.793 NotebookApp] Saving file at /train.ipynb
+[I 01:15:39.542 NotebookApp] Saving file at /train.ipynb
+[I 01:18:16.354 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 01:18:58.504 NotebookApp] Restoring connection for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 01:18:58.504 NotebookApp] Replaying 45 buffered messages
+[I 01:20:58.954 NotebookApp] Saving file at /train.ipynb
+[I 01:26:14.830 NotebookApp] Saving file at /train.ipynb
+[I 01:31:44.976 NotebookApp] Saving file at /train.ipynb
+[I 01:36:57.667 NotebookApp] Saving file at /train.ipynb
+[I 01:42:16.718 NotebookApp] Saving file at /train.ipynb
+[I 01:47:35.643 NotebookApp] Saving file at /train.ipynb
+[I 01:52:55.497 NotebookApp] Saving file at /train.ipynb
+[I 01:58:14.359 NotebookApp] Saving file at /train.ipynb
+[I 02:03:35.807 NotebookApp] Saving file at /train.ipynb
+[I 02:09:49.505 NotebookApp] Saving file at /train.ipynb
+[I 02:20:28.667 NotebookApp] Saving file at /train.ipynb
+[I 02:29:47.561 NotebookApp] Saving file at /train.ipynb
+[I 02:39:31.495 NotebookApp] Saving file at /train.ipynb
+[I 02:49:31.756 NotebookApp] Saving file at /train.ipynb
+[I 02:59:04.801 NotebookApp] Saving file at /train.ipynb
+[W 03:01:58.504 NotebookApp] WebSocket ping timeout after 119963 ms.
+[W 03:01:59.417 NotebookApp] zmq message arrived on closed channel
+[W 03:02:00.346 NotebookApp] zmq message arrived on closed channel
+[W 03:02:01.264 NotebookApp] zmq message arrived on closed channel
+[W 03:02:02.181 NotebookApp] zmq message arrived on closed channel
+[W 03:02:03.103 NotebookApp] zmq message arrived on closed channel
+[I 03:02:03.506 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 11:58:00.429 NotebookApp] 302 GET / (131.159.40.158) 2.190000ms
+[I 17:27:12.224 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 20:20:02.724 NotebookApp] Discarding 71518 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:459b1e4d4a3940d68dd1ebe1e240ec0c
+[I 20:20:11.687 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:4a7e32319585465b824a7933f7c2fc16
+[I 22:33:08.471 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 00:21:23.181 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 00:50:10.171 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 02:36:22.292 NotebookApp] 302 GET / (131.159.40.158) 0.230000ms
+[I 09:39:11.666 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 12:22:58.503 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 19:52:35.028 NotebookApp] 302 GET / (131.159.40.158) 0.260000ms
+[I 22:27:52.026 NotebookApp] 302 GET /tree? (131.159.40.158) 0.380000ms
+[I 22:28:07.552 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 01:47:43.020 NotebookApp] 302 GET / (131.159.40.158) 0.250000ms
+[I 01:47:48.540 NotebookApp] Discarding 122667 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:4a7e32319585465b824a7933f7c2fc16
+[I 01:47:59.531 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:88ac4fb02bec45a7ac670a5dbbd9e4cb
+[I 09:18:07.610 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+[I 16:56:30.859 NotebookApp] 302 GET /tree? (131.159.40.158) 1.580000ms
+[I 16:56:41.432 NotebookApp] 302 GET / (131.159.40.158) 1.040000ms
+[I 01:33:54.424 NotebookApp] 302 GET / (131.159.40.158) 1.050000ms
+[I 01:34:01.495 NotebookApp] Discarding 30995 buffered messages for f3e14203-ec19-4fce-abfd-b1a622296287:88ac4fb02bec45a7ac670a5dbbd9e4cb
+[IPKernelApp] ERROR | No such comm target registered: jupyter.widget.control
+[IPKernelApp] WARNING | No such comm: 7c40114d-dadc-4306-8990-08e12a80ec8f
+[I 01:34:03.852 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:98b7d84b64b545afa3757e62fe1b5337
+[I 02:20:32.629 NotebookApp] 302 GET / (131.159.40.158) 0.980000ms
+[I 19:54:55.706 NotebookApp] 302 GET / (131.159.40.158) 0.980000ms
+[IPKernelApp] ERROR | No such comm target registered: jupyter.widget.control
+[IPKernelApp] WARNING | No such comm: 49f39a17-d3c2-49a1-97ad-9d2fa7dc1ee3
+[I 19:56:43.939 NotebookApp] Starting buffering for f3e14203-ec19-4fce-abfd-b1a622296287:70edbe3808f84dd6823300848c94e694
+[I 19:56:43.955 NotebookApp] Kernel shutdown: f3e14203-ec19-4fce-abfd-b1a622296287
+[I 19:57:33.499 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:57:47.627 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:58:43.454 NotebookApp] Saving file at /train.ipynb
+[I 19:58:50.129 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 19:59:17.618 NotebookApp] Saving file at /configs/global_configs.yaml
+[E 19:59:33.776 NotebookApp] Exception restarting kernel
+    Traceback (most recent call last):
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/services/kernels/handlers.py", line 89, in post
+        yield maybe_future(km.restart_kernel(kernel_id))
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/tornado/gen.py", line 769, in run
+        value = future.result()
+      File "/usr/lib/python3.10/asyncio/futures.py", line 201, in result
+        raise self._exception.with_traceback(self._exception_tb)
+      File "/usr/lib/python3.10/asyncio/tasks.py", line 232, in __step
+        result = coro.send(None)
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/services/kernels/kernelmanager.py", line 313, in restart_kernel
+        self._check_kernel_id(kernel_id)
+      File "/home/youssef/.cache/pypoetry/virtualenvs/machine_learning_for_3d_geometry_final_pro-8w_t9tN0-py3.10/lib/python3.10/site-packages/notebook/services/kernels/kernelmanager.py", line 394, in _check_kernel_id
+        raise web.HTTPError(404, f'Kernel does not exist: {kernel_id}')
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f3e14203-ec19-4fce-abfd-b1a622296287)
+[E 19:59:33.783 NotebookApp] {
+      "Host": "localhost:3600",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Referer": "http://localhost:3600/notebooks/train.ipynb",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+    }
+[E 19:59:33.783 NotebookApp] 500 POST /api/kernels/f3e14203-ec19-4fce-abfd-b1a622296287/restart (131.159.40.158) 8.670000ms referer=http://localhost:3600/notebooks/train.ipynb
+[W 19:59:33.835 NotebookApp] 404 DELETE /api/sessions/f4f9cb44-3d4b-43e4-90fa-4deeb567ed5b (131.159.40.158): Session not found: session_id='f4f9cb44-3d4b-43e4-90fa-4deeb567ed5b'
+[W 19:59:33.835 NotebookApp] Session not found: session_id='f4f9cb44-3d4b-43e4-90fa-4deeb567ed5b'
+[W 19:59:33.836 NotebookApp] 404 DELETE /api/sessions/f4f9cb44-3d4b-43e4-90fa-4deeb567ed5b (131.159.40.158) 2.650000ms referer=http://localhost:3600/notebooks/train.ipynb
+[I 19:59:34.295 NotebookApp] Kernel started: 25e8fb6e-e7fa-40fa-b4bf-5435870f17e6, name: python3
+[I 20:00:10.627 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 20:00:17.391 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 20:00:30.831 NotebookApp] Saving file at /configs/global_configs.yaml
+[I 20:00:43.809 NotebookApp] Saving file at /train.ipynb
+[I 20:01:01.476 NotebookApp] Saving file at /train.ipynb
+[I 20:02:39.970 NotebookApp] Saving file at /train.ipynb
+[I 20:10:40.058 NotebookApp] Saving file at /train.ipynb
+[I 20:12:40.188 NotebookApp] Saving file at /train.ipynb
+[I 20:13:23.149 NotebookApp] Starting buffering for 25e8fb6e-e7fa-40fa-b4bf-5435870f17e6:70edbe3808f84dd6823300848c94e694
+[I 10:42:36.196 NotebookApp] 302 GET / (131.159.40.158) 0.300000ms
+[I 18:52:39.074 NotebookApp] 302 GET / (131.159.40.158) 0.390000ms
+[I 19:39:28.439 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 21:37:46.599 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 01:46:35.720 NotebookApp] 302 GET / (131.159.40.158) 0.230000ms
+[I 03:34:46.208 NotebookApp] 302 GET / (131.159.40.158) 0.240000ms
+[I 03:36:55.338 NotebookApp] 302 GET / (131.159.40.158) 0.310000ms
+[I 16:40:58.209 NotebookApp] 302 GET / (131.159.40.158) 0.460000ms
+[I 17:56:54.542 NotebookApp] 302 GET / (131.159.40.158) 0.340000ms
+[I 13:13:38.730 NotebookApp] 302 GET / (131.159.40.158) 0.270000ms
+[I 20:11:46.020 NotebookApp] 302 GET / (131.159.40.158) 0.270000ms

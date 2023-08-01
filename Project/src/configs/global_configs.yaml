@@ -1,24 +1,25 @@
-logs_dir: logs/final_models/evaluations/transformer_fusion
+logs_dir: logs
 is_train: true
-name: 20_views
+name: full_dataset_with_pretrained_6views_try7
 device: cuda:0
 batch_size: 8
-n_epochs: 100
+n_epochs: 200
 append_loss_every: 50
 print_every: 150
 #print_every: 10
 validate_every: 4349
 save_every: 500
 save_every_nepochs: 10
-start_epoch: 0
-start_iteration: 0
+start_epoch: 57
+start_iteration: 253149
+#start_iteration: 0
 visualize_every: 1000
 
 model:
   lr: 0.0001
   criterion: DICE_BCE #BCE | DICE | DICE_BCE
-  pos_weight: None # weight of positive class
-  fusion: Transformer #AVG | TRANSFORMER
+  pos_weight: 1.8 # weight of positive class
+  fusion: AVG #AVG | TRANSFORMER
 
   encoder:
     patch_size: 16
@@ -45,5 +46,6 @@ model:
     
 evaluation:
    #ckpt_path: logs/final_models/avg_fusion/checkpoints/epoch-latest.ckpt
-   ckpt_path: logs/final_models/transformer_fusion/fusion_transformer_all_ds/checkpoints/epoch-latest.ckpt
+   ckpt_path: logs/full_dataset_with_pretrained_6views_try7/checkpoints/epoch-latest.ckpt
+   #ckpt_path: logs/final_models/transformer_fusion/fusion_transformer_all_ds/checkpoints/epoch-latest.ckpt
 #ckpt_path: logs/final_models/avg_fusion/epoch-50.ckpt
