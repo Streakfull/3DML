@@ -5,7 +5,6 @@ import k3d
 from matplotlib import cm, colors
 import PIL.Image
 import IPython.display
-import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 from torch.nn import Sigmoid
@@ -29,40 +28,43 @@ def visualize_pointcloud(point_cloud, point_size, colors=None, flip_axes=False, 
         np.float32), point_size=point_size, colors=colors if colors is not None else [], color=0xd0d0d0)
     plot += plt_points
     plt_points.shader = '3d'
-    #import pdb;pdb.set_trace();
     plot.display()
     plt.show()
 
 
 def visualize_image(image_array):
     plt.imshow(image_array)
-    
-sigm = Sigmoid()
-def save_voxels(pred, gt, save_path, iteration, is_train = True):
-     pred_plots = plot_voxels(sigm(pred.detach()), rot02=1,rot12=1)
 
-     gt_plots = plot_voxels(gt.detach(), rot02=1,rot12=1)
-     title = "train"
-     if(not is_train):
+
+sigm = Sigmoid()
+
+
+def save_voxels(pred, gt, save_path, iteration, is_train=True):
+    pred_plots = plot_voxels(sigm(pred.detach()), rot02=1, rot12=1)
+
+    gt_plots = plot_voxels(gt.detach(), rot02=1, rot12=1)
+    title = "train"
+    if (not is_train):
         title = "validation"
-     fig = visualize_png(gt_plots + pred_plots, f"{title}/Target-Reconstruction", rows=2)
-     final_save_path = f"{save_path}/{title}_{int(iteration)}"
-     print(final_save_path, "saved")
-     fig.savefig(final_save_path)
-     print(final_save_path, "saved")
-     return fig
-    
+    fig = visualize_png(gt_plots + pred_plots,
+                        f"{title}/Target-Reconstruction", rows=2)
+    final_save_path = f"{save_path}/{title}_{int(iteration)}"
+    print(final_save_path, "saved")
+    fig.savefig(final_save_path)
+    print(final_save_path, "saved")
+    return fig
+
+
 def plot_voxels(voxels_input, rot01=0, rot02=0, rot12=0, nimgs=3):
     output = []
     for i in range(nimgs):
         voxels = voxels_input[i]
-    #import pdb; pdb.set_trace()
         voxels[voxels >= 0.5] = 1
         voxels[voxels < 0.5] = 0
         voxels = voxels.rot90(rot01, (0, 1))
         voxels = voxels.rot90(rot02, (0, 2))
         voxels = voxels.rot90(rot12, (1, 2))
-        ax = plt.figure(figsize=(20,20)).add_subplot(projection='3d')
+        ax = plt.figure(figsize=(20, 20)).add_subplot(projection='3d')
         ax.set_box_aspect((1, 1, 1))
         ax.voxels(voxels)
         buf = io.BytesIO()
@@ -80,61 +82,56 @@ def plot_voxels(voxels_input, rot01=0, rot02=0, rot12=0, nimgs=3):
 
     return output
 
-    
-
 
 def visualize_images(images, rows=5):
     nimages = images.shape[0]
     columns = nimages//rows
     if (nimages % rows != 0):
         rows += 1
-    if(columns == 0):
+    if (columns == 0):
         columns = 1
     fig = plt.figure(figsize=(20, 20))
-    #fig.suptitle('ss', fontsize=20)
     for i, img in enumerate(images):
         fig.add_subplot(rows, columns, i+1)
         plt.imshow(img)
-    #plt.show()
     return fig
+
 
 def visualize_png(images, title, rows=3):
     nimages = len(images)
     columns = nimages//rows
     if (nimages % rows != 0):
         rows += 1
-    if(columns == 0):
+    if (columns == 0):
         columns = 1
-   
-    fig = plt.figure(figsize=(10,4.8))
+
+    fig = plt.figure(figsize=(10, 4.8))
     fig.suptitle(title, fontsize=20)
     for i, img in enumerate(images):
         fig.add_subplot(rows, columns, i+1)
         plt.imshow(img)
-    
-#     for ax in fig.axes:
-#         ax.axison = False
-    #plt.show()
+
+    for ax in fig.axes:
+        ax.axison = False
     plt.show()
     return fig
+
 
 def visualize_png2(images, title, rows=5):
     nimages = len(images)
     columns = nimages//rows
     if (nimages % rows != 0):
         rows += 1
-    if(columns == 0):
+    if (columns == 0):
         columns = 1
-   
-    fig = plt.figure(figsize=(10,4.8))
+
+    fig = plt.figure(figsize=(10, 4.8))
     fig.suptitle(title, fontsize=20)
     for i, img in enumerate(images):
         fig.add_subplot(rows, columns, i+1)
         plt.imshow(img)
-    
+
     for ax in fig.axes:
         ax.axison = False
-    #plt.show()
     plt.show()
     return fig
-

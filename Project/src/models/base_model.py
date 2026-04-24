@@ -4,17 +4,18 @@ import torch
 import utils.util as util
 
 # modified from https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+
+
 class BaseModel(torch.nn.Module):
     def name(self):
         return 'BaseModel'
 
     def __init__(self):
-        super(BaseModel,self).__init__()
-    
+        super(BaseModel, self).__init__()
 
     def initialize(self, opt):
         self.opt = opt
-        self.is_train= opt.is_train
+        self.is_train = opt.is_train
 
         if self.is_train:
             self.save_dir = os.path.join(opt.logs_dir, opt.name, 'checkpoints')
@@ -40,35 +41,24 @@ class BaseModel(torch.nn.Module):
         pass
 
     def save(self, path, epoch="latest"):
-         checkpoint_name =  f"{path}/epoch-{epoch}.ckpt"
-         cprint(f"{checkpoint_name} created", "blue")
-         torch.save(self.state_dict(), checkpoint_name)
-
-    # def train(self):
-    #     pass
-
-    # def eval(self):
-    #     pass
-
-#     def to(self, device):
-#         pass
+        checkpoint_name = f"{path}/epoch-{epoch}.ckpt"
+        cprint(f"{checkpoint_name} created", "blue")
+        torch.save(self.state_dict(), checkpoint_name)
 
     def inference(self):
         pass
 
     def get_loss(self):
         return 0
-    
+
     def update_lr(self):
         pass
 
     def load_ckpt(self):
-       pass
+        pass
 
     def tocuda(self, var_names):
         for name in var_names:
             if isinstance(name, str):
                 var = getattr(self, name)
                 setattr(self, name, var.cuda(0, non_blocking=True))
-                
-

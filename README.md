@@ -1,48 +1,136 @@
-# 3DML
+# 3D Machine Learning — Multi-View 3D Reconstruction
 
-This repo contains all related work for the Machine Learning for 3D Geometry Course SS23.
+> Transformer-based pipeline for reconstructing 3D voxel occupancy grids from single or multiple 2D images, trained and evaluated on ShapeNet.
 
-# Project
+Built as part of the **Machine Learning for 3D Geometry** course (SS23) at TUM.
 
-3D shape reconstruction from 2D images
+![Reconstructions](imgs/reconstructions.png)
+
+## Project — 2D → 3D Shape Reconstruction
+
+The main project (`Project/`) implements an end-to-end model that takes one or more 2D renderings of a 3D object and predicts its 32³ voxel occupancy grid.
+
+### Pipeline
+
+![Pipeline](imgs/Pipeline.png)
+
+### Architecture
+
+| Component | Description |
+|---|---|
+| **Encoder** | Pretrained DeiT (Data-efficient Image Transformer) extracts patch-level features from input images |
+| **View Fusion** | Transformer-based or average-pooling fusion to aggregate features across multiple views |
+| **Transformer Decoder** | Learned positional embeddings decoded through a multi-layer transformer |
+| **3D Decoder** | Residual 3D-CNN with transposed convolutions upsamples latent codes to a 32³ voxel grid |
+| **Loss** | Dice + BCE composite loss with configurable positive-class weighting |
+| **Metric** | Intersection-over-Union (IoU) on binarized voxel predictions |
+
+### Project Structure
+
+```
+Project/src/
+├── models/
+│   ├── Transform2D.py       # Main model: DeiT encoder → transformer decoder → 3D CNN
+│   └── base_model.py        # Base class with save/load/train utilities
+├── blocks/
+│   ├── patch_encoder.py      # Patch-based image encoding
+│   ├── transformer_encoder.py
+│   ├── transformer_decoder.py
+│   ├── view_fusion.py        # Multi-view feature fusion
+│   ├── simple_decoder.py     # 3D transposed-conv decoder
+│   ├── torch_encoder.py      # CNN-based 2D encoder (alternative)
+│   └── torch_decoder.py      # CNN-based 3D decoder (alternative)
+├── datasets/
+│   └── shape_net.py          # ShapeNet dataloader with voxel + multi-view images
+├── losses/
+│   ├── build_loss.py         # Loss factory (BCE / Dice / Dice+BCE)
+│   ├── dice_loss.py
+│   └── dice_loss_bce.py
+├── evaluation/
+│   └── Evaluation.py         # Per-class IoU evaluation with top-k visualizations
+├── configs/
+│   └── global_configs.yaml   # All hyperparameters and training settings
+└── utils/
+    ├── util.py               # IoU computation, seeding, image I/O
+    ├── visualizations.py     # Voxel and point-cloud visualization
+    ├── model_utils.py        # Weight initialization
+    ├── constants.py          # Dataset paths and defaults
+    └── binvox_rw.py          # Binvox file reader
+```
+
+### Usage
+
+**Training**
+1. Adjust hyperparameters in `Project/src/configs/global_configs.yaml`
+2. Run the `Project/src/train.ipynb` notebook
+
+**Evaluation**
+1. Set `evaluation.ckpt_path` in the config to the desired checkpoint
+2. Run the `Project/src/evaluation.ipynb` notebook
+
+### Checkpoints & Results
+
+[All checkpoints, experiments, results, TensorBoard logs, and training visualizations (Google Drive)](https://drive.google.com/drive/folders/1zppUpldYmmwKAwD0guCpYVZuU1NZEck-?usp=sharing)
+
+---
+
+## Exercises
+
+The course exercises build foundational 3D ML skills:
+
+### Exercise 1 — Point Clouds, Occupancy Grids & Marching Cubes
+
+Implicit surface representations (SDF), occupancy grids, point cloud processing, and mesh extraction via marching cubes.
+
+<p align="center">
+  <img src="E2/visualImages/occupancy_grid_1.png" width="30%" />
+  <img src="E2/visualImages/point_cloud_1.png" width="30%" />
+  <img src="E2/visualImages/point_cloud_seg.png" width="30%" />
+</p>
+<p align="center">
+  <img src="E1/exercise_1/images/torus_mesh.png" width="30%" />
+  <img src="E1/exercise_1/images/sphere_mesh.png" width="30%" />
+  <img src="E1/exercise_1/images/atom_mesh.png" width="30%" />
+</p>
+
+### Exercise 2 — Learning Implicit Representations
+
+Neural network–based implicit function learning for 3D shape representation, including training and inference pipelines.
+
+<p align="center">
+  <img src="E2/visualImages/occupancy_grid_3.png" width="22%" />
+  <img src="E2/visualImages/occupancy_grid_4.png" width="22%" />
+  <img src="E2/visualImages/point_cloud_seg_2.png" width="22%" />
+  <img src="E2/visualImages/point_cloud_seg_3.png" width="22%" />
+</p>
+
+### Exercise 3 — DeepSDF
+
+Implementation of DeepSDF for learning continuous signed distance functions, with latent space interpolation and shape completion.
+
+<p align="center">
+  <img src="E3/visualImages/deepsdf_mesh1.png" width="22%" />
+  <img src="E3/visualImages/latent_interp.gif" width="22%" />
+  <img src="E3/visualImages/deep_sdf_incomplete_reconstruction.png" width="22%" />
+  <img src="E3/visualImages/deepsdf_gt1.png" width="22%" />
+</p>
+
+---
 
 ## Setup
 
-##### This mentions the steps neededed to run the project on the 3DML cluster provided by TUM
+```bash
+cd Project
+poetry install
+poetry shell
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 \
+    -f https://download.pytorch.org/whl/cu113/torch_stable.html
+```
 
-- `ssh <user>@ml3d.vc.in.tum.de` - ssh into the login node
-  - You will be prompted to enter your password
-- `salloc --gpus=1`
-- `mkdir /cluster/54/<user>`
-- `cd /cluster/54/<user>`
-- `git clone https://<github_token_here>@github.com/Streakfull/3DML.git`
-- `cd 3DML/Project`
-- `poetry install`
-- `poetry shell`
-- `pip3 install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html`
-- `poetry run jupyter notebook --no-browser --ip=0.0.0.0 --port=8888`
-- From your local machine: `ssh -NL 3000:TUINI15-<connected_node>.vc.in.tum.de:8888 <user>@ml3d.vc.in.tum.de`
-- Run the `initial_setup.ipynb` notebook to obtain the dataset
+Run `Project/src/inital_setup.ipynb` to download the ShapeNet dataset.
 
-## Checkpoints and results
-* [You can find all checkpoints and experiments, results, tensorboard and tarining visualizations](https://drive.google.com/drive/folders/1zppUpldYmmwKAwD0guCpYVZuU1NZEck-?usp=sharing)
+## Team
 
-## Training
-To train the model run the `train.ipynb` notebook after adjusting the global configs
-
-## Evaluation
-To evaluate the model on the test set run the `evaluation.ipynb` notebook after 
-
-# General Links
-
-##### This section contains any useful links found
-
-- [3D-R2N2 Repo](https://github.com/chrischoy/3D-R2N2)
-- [How to get a github token](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
-- [Connecting to 3D ML Cluster](https://www.moodle.tum.de/pluginfile.php/4556578/mod_resource/content/1/ML3D%20Compute%20Cluster.pdf)
-
-# Team
-
-- Biray Sutcuoglu - biray.sutcuoglu@tum.de
-- Michael Kubitza - michael.kubitza@tum.de
-- Youssef Youssef - youssef@youssef.tum.de
+- **Biray Sutcuoglu** — biray.sutcuoglu@tum.de
+- **Michael Kubitza** — michael.kubitza@tum.de
+- **Youssef Youssef** — youssef.youssef@tum.de
